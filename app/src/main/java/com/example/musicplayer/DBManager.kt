@@ -17,8 +17,8 @@ class DBManager {
     val colArtist = "Artist"
     val dbVertion = 1
 
-    val sqlCreatTable = "CREAT TABLE IF NOT EXISTS " + dbTable + " ( " + colID + " INTEGER PRIMARY KEY, " +
-     colTitle + " TEXT, " + colArtist + " TEXT); "
+    val sqlCreatTable = "CREATE TABLE IF NOT EXISTS " + dbTable +" (" + colID +
+            " INTEGER PRIMARY KEY, " + colTitle + " TEXT, " + colArtist + " TEXT);"
 
     var sqlDB:SQLiteDatabase ?= null
 

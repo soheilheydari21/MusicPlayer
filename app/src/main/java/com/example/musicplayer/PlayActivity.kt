@@ -1,5 +1,8 @@
 package com.example.musicplayer
 
+import android.content.Context
+import android.content.Intent
+import android.media.AudioManager
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,10 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
+import android.widget.Toast
+import androidx.lifecycle.ViewModelStore
+//import com.example.musicplayer.PlayActivity.seecbar.mySongThread
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_play.*
 import kotlinx.android.synthetic.main.activity_play.view.*
 import kotlinx.android.synthetic.main.row_layout.*
+import kotlin.random.Random
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
 
@@ -27,12 +34,16 @@ class PlayActivity : AppCompatActivity() {
 
         adapter = PlaySongAdapter(listofsongs)
 
+//        var mySongAdapter = seecbar<mySongThread>()
+//        seecbar.mySongThread().start()
+
         var flag = 0
 
         imageHeart.setOnClickListener {
             if (flag == 0) {
                 imageHeart.setImageResource(R.drawable.baseline_favorite_white_18dp);
                 flag = 1;
+                Toast.makeText(this," Add song to Favourite list ",Toast.LENGTH_SHORT).show()
             }else if (flag == 1){
                 imageHeart.setImageResource(R.drawable.baseline_favorite_border_white_18dp)
                 flag = 0;
@@ -71,18 +82,41 @@ class PlayActivity : AppCompatActivity() {
         }
 
         imageSpeaker.setOnClickListener {
-            if (flag == 0) {
-                imageSpeaker.setImageResource(R.drawable.mute);
-                flag = 1;
-            }else if (flag == 1){
-                imageSpeaker.setImageResource(R.drawable.baseline_volume_up_white_18dp);
-                flag = 0;
-            }
+
+                val audioManager: AudioManager =getSystemService(Context.AUDIO_SERVICE) as AudioManager
+
+                val maxVolume = audioManager.mediaMaxVolume
+                val randomIndex = Random.nextInt(((maxVolume - 0) + 1) + 0)
+
+                audioManager.setMediaVolume(randomIndex)
+                toast("Max: $maxVolume / Current: ${audioManager.mediaCurrentVolume}")
+
         }
 
+        baseline.setOnClickListener {
+            val listIntent = Intent(this@PlayActivity, MainActivity::class.java)
+            startActivity(listIntent)
+        }
 
+    }
+    
+    // volume
+    fun AudioManager.setMediaVolume(volumeIndex:Int) {
 
+        this.setStreamVolume(
+            AudioManager.STREAM_MUSIC,
+            volumeIndex,
+            AudioManager.FLAG_SHOW_UI
+        )
+    }
+    val AudioManager.mediaMaxVolume:Int
+    get() = this.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
 
+    val AudioManager.mediaCurrentVolume:Int
+    get() = this.getStreamVolume(AudioManager.STREAM_MUSIC)
+
+    fun Context.toast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
     }
 
@@ -121,27 +155,30 @@ class PlayActivity : AppCompatActivity() {
 
     }
 
-//    timer sicbar
+    // Todo fix this
+    // timer sicbar
+    class seecbar<T> : MainActivity() {
 
-//fun createTimerLable(duration: Duration)
-//    {
-//        var timerLable = ""
-//        var min = 0
-//        var sec = 0
-//
-//        min = duration / 1000 / 60
-//        sec = duration / 1000
-//              % 60
-//
-//        timerLable += min + ":"
-//
-//        if(sec < 10){
-//           timerLable += "0"
-//           timerLable += sec
-//           return timerLable
-//        }
-//
-//    }
+       inner class mySongThread : Thread() {
+          override fun run() {
+              while (true) {
+                  try {
+                     Thread.sleep(1000)
+                  } catch (ex: Exception) {
+
+                  }
+                  runOnUiThread {
+                     if (mediaPlayer != null) {
+                        seekBar.progress = mediaPlayer!!.currentPosition
+                     }
+                  }
+              }
+          }
+
+       }
+
+
+    }
 
 
 }

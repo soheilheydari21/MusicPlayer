@@ -107,7 +107,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
         app:layout_constraintEnd_toStartOf="@+id/imageView4"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView12"
+        app:layout_constraintStart_toEndOf="@+id/baseline"
         app:layout_constraintTop_toTopOf="@+id/imageView4"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/baseline_favorite_border_white_18dp" />
@@ -130,6 +130,7 @@
         android:layout_height="30dp"
         android:layout_marginBottom="35dp"
         android:progressBackgroundTint="#FFFDFD"
+        android:progressTint="#00CCB9"
         app:layout_constraintBottom_toTopOf="@+id/imageGhati"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -204,7 +205,7 @@
         app:srcCompat="@drawable/iconspace_suffle_25px_128" />
 
     <ImageView
-        android:id="@+id/imageView12"
+        android:id="@+id/baseline"
         android:layout_width="43dp"
         android:layout_height="43dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageHeart"

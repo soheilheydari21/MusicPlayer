@@ -1,6 +1,7 @@
 package com.example.musicplayer
 
 import android.app.SearchManager
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -14,11 +15,12 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.SearchView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_play.*
 import kotlinx.android.synthetic.main.row_layout.*
 import kotlinx.android.synthetic.main.row_layout.view.*
 import kotlinx.android.synthetic.main.row_layout.view.textViewDesc
 
-class MainActivity : AppCompatActivity() {
+open class MainActivity : AppCompatActivity() {
 
     var listofsongs = ArrayList<SongInfo>()
     var adapter:MySongAdapter ?= null
@@ -29,13 +31,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 //        LoadData("%")
-
+//
 //        var dbManager = DBManager(this)
-
+//
 //        var values = ContentValues()
 //        values.put("Title", textViewTitle.text.toString())
-//        values.put("Artist",textViewArtist.text.toString())
-
+//        values.put("Artist", textViewArtist.text.toString())
+//
 //        val ID = dbManager.Insert(values)
 
 
@@ -112,7 +114,6 @@ class MainActivity : AppCompatActivity() {
                 val playIntent = Intent(this@MainActivity,PlayActivity::class.java)
                 startActivity(playIntent)
 
-
             }
 
             myView.PlayMusic.setOnClickListener {
@@ -130,6 +131,7 @@ class MainActivity : AppCompatActivity() {
                     mediaPlayer!!.setDataSource(song.SongURL)
                     mediaPlayer!!.prepare()
                     mediaPlayer!!.start()
+//                    seekBar.max = mediaPlayer!!.duration
 
 
                     myView.textViewDesc.setTextColor(Color.parseColor("#00d6b3"))
@@ -170,18 +172,18 @@ class MainActivity : AppCompatActivity() {
         val cursor = dbManager.RunQuery(columns,"Title like ?", selectionArgs,"Title")
 
         listofsongs.clear()
-        if (cursor.moveToFirst() == true)
-        {
-            do {
-                val ID = cursor.getInt(cursor.getColumnIndex("ID"))
-                val Title = cursor.getString(cursor.getColumnIndex("Title"))
-                val Artist = cursor.getString(cursor.getColumnIndex("Artist"))
-                val SongURL = cursor.getString(cursor.getColumnIndex("SongURL"))
-
-                listofsongs.add(SongInfo(Title,Artist,SongURL))
-
-            }while (cursor.moveToNext())
-        }
+//        if (cursor.moveToFirst() == true)
+//        {
+//            do {
+//                val ID = cursor.getInt(cursor.getColumnIndex("ID"))
+//                val Title = cursor.getString(cursor.getColumnIndex("Title"))
+//                val Artist = cursor.getString(cursor.getColumnIndex("Artist"))
+//                val SongURL = cursor.getString(cursor.getColumnIndex("SongURL"))
+//
+//                listofsongs.add(SongInfo(ID, Title, Artist))
+//
+//            }while (cursor.moveToNext())
+//        }
         adapter = MySongAdapter(listofsongs)
         listVewSong.adapter = adapter
 

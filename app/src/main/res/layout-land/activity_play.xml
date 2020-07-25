@@ -131,6 +131,7 @@
             android:layout_marginEnd="22dp"
             android:layout_marginBottom="35dp"
             android:progressBackgroundTint="#FFFDFD"
+            android:progressTint="#00CCB9"
             app:layout_constraintBottom_toTopOf="@+id/imageGhati"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -198,7 +199,7 @@
             app:srcCompat="@drawable/iconspace_suffle_25px_128" />
 
         <ImageView
-            android:id="@+id/imageView12"
+            android:id="@+id/baseline"
             android:layout_width="43dp"
             android:layout_height="43dp"
             android:layout_marginEnd="82dp"
