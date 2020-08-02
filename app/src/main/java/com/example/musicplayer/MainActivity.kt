@@ -16,6 +16,7 @@ import android.widget.BaseAdapter
 import android.widget.SearchView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_play.*
+import kotlinx.android.synthetic.main.activity_play.view.*
 import kotlinx.android.synthetic.main.row_layout.*
 import kotlinx.android.synthetic.main.row_layout.view.*
 import kotlinx.android.synthetic.main.row_layout.view.textViewDesc
@@ -23,7 +24,7 @@ import kotlinx.android.synthetic.main.row_layout.view.textViewDesc
 open class MainActivity : AppCompatActivity() {
 
     var listofsongs = ArrayList<SongInfo>()
-    var adapter:MySongAdapter ?= null
+    var adapter:MySongAdapter<Any?>?= null
     var mediaPlayer:MediaPlayer ?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,7 +94,7 @@ open class MainActivity : AppCompatActivity() {
 
 
 
-    open inner class MySongAdapter : BaseAdapter
+    open inner class MySongAdapter<T> : BaseAdapter
     {
         var myListSong = ArrayList <SongInfo>()
         constructor(myListSong:ArrayList<SongInfo>)
@@ -102,13 +103,12 @@ open class MainActivity : AppCompatActivity() {
         }
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+
             val myView = layoutInflater.inflate(R.layout.row_layout,null)
             val song = this.myListSong[position]
 
-
             myView.textViewTitle.setText(song.Title)
             myView.textViewDesc.setText(song.Desc)
-
 
             myView.coverMusic.setOnClickListener {
                 val playIntent = Intent(this@MainActivity,PlayActivity::class.java)
@@ -116,10 +116,12 @@ open class MainActivity : AppCompatActivity() {
 
             }
 
+
             myView.PlayMusic.setOnClickListener {
 
-                if (textViewDesc.textColors.equals("#00d6b3"))
+                if (myView.textViewDesc.textColors.equals("#00d6b3"))
                 {
+
                     mediaPlayer!!.stop()
                     myView.textViewDesc.setTextColor(Color.parseColor("#C3C3C3"))
                     myView.textViewTitle.setTextColor(Color.parseColor("#ffffff"))
@@ -133,10 +135,8 @@ open class MainActivity : AppCompatActivity() {
                     mediaPlayer!!.start()
 //                    seekBar.max = mediaPlayer!!.duration
 
-
                     myView.textViewDesc.setTextColor(Color.parseColor("#00d6b3"))
                     myView.textViewTitle.setTextColor(Color.parseColor("#13f8d1"))
-
 
                 }
             }
@@ -157,12 +157,11 @@ open class MainActivity : AppCompatActivity() {
             return this.myListSong.size
         }
 
-
-
-
     }
 
-///  code data base
+
+    //ToDo fix this
+//   code data base
     fun LoadData (title: String)
     {
         var dbManager = DBManager(this)
@@ -172,18 +171,18 @@ open class MainActivity : AppCompatActivity() {
         val cursor = dbManager.RunQuery(columns,"Title like ?", selectionArgs,"Title")
 
         listofsongs.clear()
-//        if (cursor.moveToFirst() == true)
-//        {
-//            do {
-//                val ID = cursor.getInt(cursor.getColumnIndex("ID"))
-//                val Title = cursor.getString(cursor.getColumnIndex("Title"))
-//                val Artist = cursor.getString(cursor.getColumnIndex("Artist"))
-//                val SongURL = cursor.getString(cursor.getColumnIndex("SongURL"))
-//
-//                listofsongs.add(SongInfo(ID, Title, Artist))
-//
-//            }while (cursor.moveToNext())
-//        }
+        if (cursor.moveToFirst() == true)
+        {
+            do {
+                val ID = cursor.getInt(cursor.getColumnIndex("ID"))
+                val Title = cursor.getString(cursor.getColumnIndex("Title"))
+                val Artist = cursor.getString(cursor.getColumnIndex("Artist"))
+                val SongURL = cursor.getString(cursor.getColumnIndex("SongURL"))
+
+                listofsongs.add(SongInfo(ID.toString(), Title, Artist))
+
+            }while (cursor.moveToNext())
+        }
         adapter = MySongAdapter(listofsongs)
         listVewSong.adapter = adapter
 
@@ -211,7 +210,10 @@ open class MainActivity : AppCompatActivity() {
         })
 
         return super.onCreateOptionsMenu(menu)
+
+        
     }
+
 
 
 }

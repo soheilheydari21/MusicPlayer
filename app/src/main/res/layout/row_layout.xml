@@ -13,14 +13,16 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@drawable/row_background"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="8dp">
 
-        <ImageView
+        <com.rishabhharit.roundedimageview.RoundedImageView
             android:id="@+id/coverMusic"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:background="@drawable/image_background"
-            app:srcCompat="@drawable/cover_final" />
+            app:srcCompat="@drawable/cover_final"
+            app:cornerRadius="15dp"
+            app:roundedCorners="all"/>
 
         <LinearLayout
             android:id="@+id/LinearLayout"
@@ -35,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLength="21"
-                android:paddingLeft="8dp"
+                android:paddingLeft="15dp"
                 android:paddingTop="2dp"
                 android:paddingEnd="5dp"
                 android:text="Title"
@@ -48,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLength="24"
-                android:paddingLeft="8dp"
+                android:paddingLeft="15dp"
                 android:paddingTop="5dp"
                 android:text="Artist"
                 android:textColor="@color/colorTosikam"

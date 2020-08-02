@@ -37,4 +37,5 @@ dependencies {
 
     implementation 'com.mikhaellopez:circularimageview:4.2.0'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.4'
+    implementation 'com.rishabhharit.roundedimageview:RoundedImageView:0.8.4'
 }

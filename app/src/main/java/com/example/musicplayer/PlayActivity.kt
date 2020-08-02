@@ -3,30 +3,24 @@ package com.example.musicplayer
 import android.content.Context
 import android.content.Intent
 import android.media.AudioManager
-import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.lifecycle.ViewModelStore
 //import com.example.musicplayer.PlayActivity.seecbar.mySongThread
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_play.*
 import kotlinx.android.synthetic.main.activity_play.view.*
 import kotlinx.android.synthetic.main.row_layout.*
 import kotlin.random.Random
-import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
 
 //@ExperimentalTime
 class PlayActivity : AppCompatActivity() {
 
     var listofsongs = ArrayList<SongInfo>()
 
-    var adapter: PlaySongAdapter ?= null
+    var adapter: PlaySongAdapter<Any> ?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,45 +35,76 @@ class PlayActivity : AppCompatActivity() {
 
         imageHeart.setOnClickListener {
             if (flag == 0) {
-                imageHeart.setImageResource(R.drawable.baseline_favorite_white_18dp);
+                imageHeart.setImageResource(R.drawable.heart1);
                 flag = 1;
                 Toast.makeText(this," Add song to Favourite list ",Toast.LENGTH_SHORT).show()
             }else if (flag == 1){
-                imageHeart.setImageResource(R.drawable.baseline_favorite_border_white_18dp)
+                imageHeart.setImageResource(R.drawable.heart)
                 flag = 0;
             }
         }
-
 
         imagePause.setOnClickListener {
             if (flag == 0) {
-                imagePause.setImageResource(R.drawable.ggg);
+                imagePause.setImageResource(R.drawable.play);
                 flag = 1;
+//                mediaPlayer!!.Pause()
             }else if (flag == 1){
-                imagePause.setImageResource(R.drawable.dddd);
+                imagePause.setImageResource(R.drawable.pause);
                 flag = 0;
+//                mediaPlayer!!.start()
             }
         }
 
-        imageGhati.setOnClickListener {
+        randomButton.setOnClickListener {
             if (flag == 0) {
-                imageGhati.setImageResource(R.drawable.nnnw);
+                randomButton.setImageResource(R.drawable.random1);
                 flag = 1;
             }else if (flag == 1){
-                imageGhati.setImageResource(R.drawable.iconspace_suffle_25px_128);
+                randomButton.setImageResource(R.drawable.random);
                 flag = 0;
             }
         }
 
         imageTekrar.setOnClickListener {
             if (flag == 0) {
-                imageTekrar.setImageResource(R.drawable.nnnn);
+                imageTekrar.setImageResource(R.drawable.refresh1);
                 flag = 1;
             }else if (flag == 1){
-                imageTekrar.setImageResource(R.drawable.iconspace_repeat_playlist_25px_128);
+                imageTekrar.setImageResource(R.drawable.refresh);
                 flag = 0;
+
             }
         }
+
+        //ToDo fix this
+        //btnForward
+//        var forwardTime: Int = 5000
+//        var playTime: Int = 0
+//        var endTime: Int = 0
+//        btnForward.setOnClickListener {
+//            if ((playTime + forwardTime) <= endTime) {
+//                playTime += forwardTime
+//                mediaPlayer.seekTo(playTime)
+//            }
+//            else if (!imagePause.isEnabled) {
+//                imagePause.isEnabled = true
+//            }
+//
+//        }
+
+        //ToDo fix this
+        //btnBackward
+//        var backwardTime: Int = 5000
+//        btnBackward.setOnClickListener {
+//            if ((playTime - backwardTime) > 0) {
+//                playTime -= backwardTime
+//                mediaPlayer.seekTo(playTime)
+//            }
+//            else if (!imagePause.isEnabled) {
+//                imagePause.isEnabled = true
+//            }
+//        }
 
         imageSpeaker.setOnClickListener {
 
@@ -89,7 +114,7 @@ class PlayActivity : AppCompatActivity() {
                 val randomIndex = Random.nextInt(((maxVolume - 0) + 1) + 0)
 
                 audioManager.setMediaVolume(randomIndex)
-                toast("Max: $maxVolume / Current: ${audioManager.mediaCurrentVolume}")
+//                toast("Max: $maxVolume / Current: ${audioManager.mediaCurrentVolume}")
 
         }
 
@@ -115,13 +140,14 @@ class PlayActivity : AppCompatActivity() {
     val AudioManager.mediaCurrentVolume:Int
     get() = this.getStreamVolume(AudioManager.STREAM_MUSIC)
 
-    fun Context.toast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+//    fun Context.toast(message: String) {
+//        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+//
+//    }
 
-    }
 
 
-    open inner class PlaySongAdapter : BaseAdapter
+     open inner class PlaySongAdapter<T> : BaseAdapter
     {
         var playListSong = ArrayList <SongInfo>()
         constructor(playListSong:ArrayList<SongInfo>)
@@ -179,6 +205,7 @@ class PlayActivity : AppCompatActivity() {
 
 
     }
+
 
 
 }
