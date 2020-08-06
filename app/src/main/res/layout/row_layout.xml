@@ -20,7 +20,7 @@
             android:id="@+id/coverMusic"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            app:srcCompat="@drawable/cover_final"
+            app:srcCompat="@drawable/coverrrl"
             app:cornerRadius="15dp"
             app:roundedCorners="all"/>
 
@@ -41,18 +41,23 @@
                 android:paddingTop="2dp"
                 android:paddingEnd="5dp"
                 android:text="Title"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
                 android:textColor="@color/colorWaith"
                 android:textSize="19sp"
+                android:textStyle="bold"
                 tools:text="Behem Kheyli Bad Kardi" />
 
             <TextView
                 android:id="@+id/textViewDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
                 android:maxLength="24"
                 android:paddingLeft="15dp"
                 android:paddingTop="5dp"
                 android:text="Artist"
+                android:textAllCaps="false"
                 android:textColor="@color/colorTosikam"
                 android:textSize="17sp"
                 tools:text="Mohammad Reza Golzar" />

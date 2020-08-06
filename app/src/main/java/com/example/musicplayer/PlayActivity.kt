@@ -183,28 +183,28 @@ class PlayActivity : AppCompatActivity() {
 
     // Todo fix this
     // timer sicbar
-    class seecbar<T> : MainActivity() {
-
-       inner class mySongThread : Thread() {
-          override fun run() {
-              while (true) {
-                  try {
-                     Thread.sleep(1000)
-                  } catch (ex: Exception) {
-
-                  }
-                  runOnUiThread {
-                     if (mediaPlayer != null) {
-                        seekBar.progress = mediaPlayer!!.currentPosition
-                     }
-                  }
-              }
-          }
-
-       }
-
-
-    }
+//    class seecbar<T> : MainActivity(MySongAdapter) {
+//
+//       inner class mySongThread : Thread() {
+//          override fun run() {
+//              while (true) {
+//                  try {
+//                     Thread.sleep(1000)
+//                  } catch (ex: Exception) {
+//
+//                  }
+//                  runOnUiThread {
+//                     if (mediaPlayer != null) {
+//                        seekBar.progress = mediaPlayer!!.currentPosition
+//                     }
+//                  }
+//              }
+//          }
+//
+//       }
+//
+//
+//    }
 
 
 

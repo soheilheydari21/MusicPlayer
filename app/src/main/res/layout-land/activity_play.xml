@@ -20,7 +20,7 @@
         android:layout_width="365dp"
         android:layout_height="365dp"
         android:layout_marginStart="40dp"
-        android:src="@drawable/cover_final"
+        android:src="@drawable/coverrrl"
         app:civ_border_color="#00d6b3"
         app:civ_border_width="3dp"
         app:civ_shadow="true"
@@ -77,6 +77,7 @@
             android:text="Title"
             android:textColor="#FFFFFF"
             android:textSize="25sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/textViewArtist"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="Behem Kheyli Bad Kardi" />
