@@ -16,13 +16,12 @@ import kotlinx.android.synthetic.main.row_layout.view.*
 
 //var adapter:MySongAdapter ?= null
 //var listofsongs = ArrayList<SongInfo>()
-//class MySongAdapter(context: Context, myListSong: ArrayList<SongInfo>) : BaseAdapter()
+var mediaPlayer: MediaPlayer? = null
+
  class MySongAdapter(context: Context, myListSong: ArrayList<SongInfo>) : BaseAdapter() {
 
-     var adapter:MySongAdapter ?= null
      var myListSong = ArrayList<SongInfo>()
-     var mediaPlayer: MediaPlayer? = null
-//     private lateinit var mContext: Context
+
      private val mContext: Context
 
     init {

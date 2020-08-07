@@ -3,11 +3,13 @@ package com.example.musicplayer
 import android.content.Context
 import android.content.Intent
 import android.media.AudioManager
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.TextView
 import android.widget.Toast
 //import com.example.musicplayer.PlayActivity.seecbar.mySongThread
 import kotlinx.android.synthetic.main.activity_play.*
@@ -79,32 +81,32 @@ class PlayActivity : AppCompatActivity() {
 
         //ToDo fix this
         //btnForward
-//        var forwardTime: Int = 5000
-//        var playTime: Int = 0
-//        var endTime: Int = 0
-//        btnForward.setOnClickListener {
-//            if ((playTime + forwardTime) <= endTime) {
-//                playTime += forwardTime
-//                mediaPlayer.seekTo(playTime)
-//            }
-//            else if (!imagePause.isEnabled) {
-//                imagePause.isEnabled = true
-//            }
-//
-//        }
+        var forwardTime: Int = 5000
+        var playTime: Int = 0
+        var endTime: Int = 0
+        btnForward.setOnClickListener {
+            if ((playTime + forwardTime) <= endTime) {
+                playTime += forwardTime
+                mediaPlayer!!.seekTo(playTime)
+            }
+            else if (!imagePause.isEnabled) {
+                imagePause.isEnabled = true
+            }
+
+        }
 
         //ToDo fix this
         //btnBackward
-//        var backwardTime: Int = 5000
-//        btnBackward.setOnClickListener {
-//            if ((playTime - backwardTime) > 0) {
-//                playTime -= backwardTime
-//                mediaPlayer.seekTo(playTime)
-//            }
-//            else if (!imagePause.isEnabled) {
-//                imagePause.isEnabled = true
-//            }
-//        }
+        var backwardTime: Int = 5000
+        btnBackward.setOnClickListener {
+            if ((playTime - backwardTime) > 0) {
+                playTime -= backwardTime
+                mediaPlayer!!.seekTo(playTime)
+            }
+            else if (!imagePause.isEnabled) {
+                imagePause.isEnabled = true
+            }
+        }
 
         imageSpeaker.setOnClickListener {
 
@@ -145,8 +147,7 @@ class PlayActivity : AppCompatActivity() {
 //
 //    }
 
-
-
+//    ToDo this fixed
      open inner class PlaySongAdapter<T> : BaseAdapter
     {
         var playListSong = ArrayList <SongInfo>()
@@ -160,8 +161,8 @@ class PlayActivity : AppCompatActivity() {
             val playView = layoutInflater.inflate(R.layout.row_layout,null)
             val playSong = this.playListSong[position]
 
-            playView.textViewTitle2.setText(playSong.Title)
-            playView.textViewArtist.setText(playSong.Desc)
+            playView.findViewById<TextView>(R.id.textViewTitle2).setText(playSong.Title)
+            playView.findViewById<TextView>(R.id.textViewArtist).setText(playSong.Desc)
 
             return playView
         }
@@ -202,11 +203,7 @@ class PlayActivity : AppCompatActivity() {
 //          }
 //
 //       }
-//
-//
 //    }
-
-
 
 }
 
