@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Coming Soon"
+        android:text="No song Favourites"
         android:textColor="#B6B0B0"
         android:textSize="24sp" />
 </FrameLayout>

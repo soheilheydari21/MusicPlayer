@@ -12,9 +12,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContextCompat.startActivity
+import kotlinx.android.synthetic.main.activity_play.*
 import kotlinx.android.synthetic.main.row_layout.view.*
 
-//var adapter:MySongAdapter ?= null
+var adapter:MySongAdapter ?= null
 //var listofsongs = ArrayList<SongInfo>()
 var mediaPlayer: MediaPlayer? = null
 
@@ -40,31 +41,31 @@ var mediaPlayer: MediaPlayer? = null
             val myView = layoutInflate.inflate(R.layout.row_layout,parent,false)
             val song = this.myListSong[position]
 
-//            myView.textViewTitle.setText(song.Title)
-//            myView.textViewDesc.setText(song.Desc)
+
             myView.findViewById<TextView>(R.id.textViewTitle).text = song.Title
             myView.findViewById<TextView>(R.id.textViewDesc).text = song.Desc
 
 //            ToDo this fixed
-//            myView.findViewById<ImageView>(R.id.coverMusic).setOnClickListener {
-//
-//                val playIntent = Intent(this, PlayActivity::class.java)
-//                startActivity(playIntent)
-//            }
+            myView.findViewById<ImageView>(R.id.coverMusic).setOnClickListener {
+
+//                val playIntent = Intent(mContext, PlayActivity::class.java)
+//                mContext.startActivity(playIntent)
+            }
+
+
 
             myView.findViewById<LinearLayout>(R.id.PlayMusic).setOnClickListener {
 
-//                if (myView.textViewDesc.textColors.equals("#00d6b3"))
                 if (myView.findViewById<TextView>(R.id.textViewDesc).textColors.equals("#00d6b3"))
                 {
+
                     mediaPlayer!!.stop()
-//                    myView.textViewDesc.setTextColor(Color.parseColor("#C3C3C3"))
-//                    myView.textViewTitle.setTextColor(Color.parseColor("#ffffff"))
                     myView.findViewById<TextView>(R.id.textViewDesc).setTextColor(Color.parseColor("#C3C3C3"))
                     myView.findViewById<TextView>(R.id.textViewTitle).setTextColor(Color.parseColor("#ffffff"))
                 }
                 else
                 {
+
                     mediaPlayer = MediaPlayer()
 
                     mediaPlayer!!.setDataSource(song.SongURL)

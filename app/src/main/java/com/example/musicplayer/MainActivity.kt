@@ -33,14 +33,15 @@ open class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        LoadData("%")
-
+//        LoadData("%")
+//
 //        var dbManager = DBManager(this)
 //        var values = ContentValues()
 //        values.put("Title", findViewById<TextView>(R.id.textViewTitle).text.toString())
 //        values.put("Artist", findViewById<TextView>(R.id.textViewArtist).text.toString())
-
+//
 //        val ID = dbManager.Insert(values)
+
 
         val fragmentAdapter = MyPagerAdapter(supportFragmentManager)
         viewPager.adapter = fragmentAdapter
@@ -71,12 +72,16 @@ open class MainActivity : AppCompatActivity() {
                 val Artist = cursor.getString(cursor.getColumnIndex("Artist"))
                 val SongURL = cursor.getString(cursor.getColumnIndex("SongURL"))
 
+
                 listofsongs.add(SongInfo(ID.toString(), Title, Artist))
 
             }while (cursor.moveToNext())
         }
-//        adapter = MySongAdapter(activity!!.applicationContext,listofsongs)
+
+//        adapter = MySongAdapter(this ,listofsongs)
 //        listVewSong.adapter = adapter
+
+
 
     }
 
@@ -103,6 +108,7 @@ open class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
 
     }
+
 
 }
 

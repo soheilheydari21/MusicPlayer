@@ -9,6 +9,7 @@ class SongInfo
     var Title:String ?= null
     var Desc:String ?= null
     var SongURL:String ?= null
+//    var CoverURL:String ?= null
 
 
     constructor(title:String,desc:String,songURL:String)
@@ -16,5 +17,7 @@ class SongInfo
         this.Title = title
         this.Desc = desc
         this.SongURL = songURL
+//        this.CoverURL = coverURL
+
     }
 }

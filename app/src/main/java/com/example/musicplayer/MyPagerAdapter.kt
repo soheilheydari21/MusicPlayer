@@ -10,21 +10,27 @@ class MyPagerAdapter (fm : FragmentManager) : FragmentPagerAdapter(fm) {
             0->{
                 FragmentOne()
             }
-            1-> FragmentTwo()
-            else-> {
-                return FragmentThree()
+            1->{
+                FragmentTwo()
+            }
+            2->{
+                FragmentThree()
+            }
+            else->{
+                return FragmentFour()
             }
         }
     }
 
     override fun getCount(): Int {
-        return 3
+        return 4
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
         return when (position){
             0-> "Device"
             1-> "Online"
+            2-> "Album"
             else-> {
                 return "Favourites"
             }
