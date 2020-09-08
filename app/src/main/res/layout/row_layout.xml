@@ -16,6 +16,7 @@
         android:orientation="horizontal"
         android:paddingLeft="8dp">
 
+
         <com.rishabhharit.roundedimageview.RoundedImageView
             android:id="@+id/coverMusic"
             android:layout_width="60dp"
@@ -23,6 +24,7 @@
             app:cornerRadius="15dp"
             app:roundedCorners="all"
             app:srcCompat="@drawable/coverrrl" />
+
 
         <LinearLayout
             android:id="@+id/LinearLayout"

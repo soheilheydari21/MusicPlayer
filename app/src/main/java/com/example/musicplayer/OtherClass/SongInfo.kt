@@ -1,4 +1,4 @@
-package com.example.musicplayer
+package com.example.musicplayer.OtherClass
 
 import android.icu.text.CaseMap
 import android.provider.MediaStore

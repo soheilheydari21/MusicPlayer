@@ -1,9 +1,11 @@
-package com.example.musicplayer
+package com.example.musicplayer.Splash
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import com.example.musicplayer.Activity.MainActivity
+import com.example.musicplayer.R
 
 class SpalshScreenActivity : AppCompatActivity() {
 

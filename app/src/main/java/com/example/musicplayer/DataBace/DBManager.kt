@@ -1,4 +1,4 @@
-package com.example.musicplayer
+package com.example.musicplayer.DataBace
 
 import android.content.ContentValues
 import android.content.Context
@@ -26,7 +26,6 @@ class DBManager {
     {
         val db = DatabaseHelper(context)
         sqlDB = db.writableDatabase
-
     }
 
     inner class DatabaseHelper : SQLiteOpenHelper
@@ -45,14 +44,12 @@ class DBManager {
         override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
             db!!.execSQL("DROP TABLE IF EXISTS " + dbTable)
         }
-
     }
 
     fun Insert(values:ContentValues) : Long
     {
         val ID = sqlDB!!.insert(dbTable,"", values)
         return ID
-
     }
 
     fun RunQuery(columns:Array<String>, selection:String, selectionArgs:Array<String>,sortOrder:String):Cursor

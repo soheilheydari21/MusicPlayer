@@ -1,21 +1,20 @@
-package com.example.musicplayer
+package com.example.musicplayer.Adapters
 
 import android.content.Context
-import android.content.Intent
-import android.graphics.Color
 import android.media.MediaPlayer
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import kotlinx.android.synthetic.main.row_online_layout.view.*
+import com.example.musicplayer.R
+import com.example.musicplayer.OtherClass.SongInfo
 
 //var mediaPlayerOnline: MediaPlayer? = null
 
 class MySongOnline(context: Context, myListSong: ArrayList<SongInfo>) : BaseAdapter() {
 
     var myListSong = ArrayList<SongInfo>()
-
     private val nContext: Context
 
     init {
@@ -39,7 +38,9 @@ class MySongOnline(context: Context, myListSong: ArrayList<SongInfo>) : BaseAdap
 
             if (flage == 0)
             {
-                myView.findViewById<ImageView>(R.id.imageViewDownload).setImageResource(R.drawable.stop);
+                myView.findViewById<ImageView>(R.id.imageViewDownload).setImageResource(
+                    R.drawable.stop
+                );
                 flage = 1;
 //                Toast.makeText(nContext,"Loading...",Toast.LENGTH_SHORT).show()
 
@@ -52,13 +53,15 @@ class MySongOnline(context: Context, myListSong: ArrayList<SongInfo>) : BaseAdap
             }
             else if (flage == 1)
             {
-                myView.findViewById<ImageView>(R.id.imageViewDownload).setImageResource(R.drawable.play_download);
+                myView.findViewById<ImageView>(R.id.imageViewDownload).setImageResource(
+                    R.drawable.play_download
+                );
                 flage = 0;
 
                 mediaPlayer!!.stop()
-
             }
         }
+
         return myView
 
     }

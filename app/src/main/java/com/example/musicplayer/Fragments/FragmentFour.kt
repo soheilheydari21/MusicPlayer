@@ -1,18 +1,14 @@
-package com.example.musicplayer
+package com.example.musicplayer.Fragments
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListView
-import android.widget.TextView
-import kotlinx.android.synthetic.main.fragment_three.*
+import com.example.musicplayer.R
 
-class FragmentThree : Fragment() {
+
+class FragmentFour : Fragment() {
 
 
     override fun onCreateView(
@@ -20,7 +16,7 @@ class FragmentThree : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_three, container, false)
+        val view = inflater.inflate(R.layout.fragment_four, container, false)
 
 
         return view

@@ -1,37 +1,33 @@
-package com.example.musicplayer
+package com.example.musicplayer.Activity
 
 import android.app.SearchManager
-import android.content.ContentValues
 import android.content.Context
-import android.content.Intent
-import android.graphics.Color
-import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.Menu
-import android.view.View
-import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.ListView
-import android.widget.SearchView
-import android.widget.TextView
+import android.widget.*
+import com.example.musicplayer.Adapters.MyPagerAdapter
+import com.example.musicplayer.Adapters.MySongAdapter
+import com.example.musicplayer.DataBace.DBManager
+import com.example.musicplayer.R
+import com.example.musicplayer.OtherClass.SongInfo
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_play.*
-import kotlinx.android.synthetic.main.activity_play.view.*
-import kotlinx.android.synthetic.main.fragment_one.*
-import kotlinx.android.synthetic.main.row_layout.*
-import kotlinx.android.synthetic.main.row_layout.view.*
-import kotlinx.android.synthetic.main.row_layout.view.textViewDesc
 
 open class MainActivity : AppCompatActivity() {
 
-    var adapter:MySongAdapter ?= null
+    var adapter: MySongAdapter?= null
     var listofsongs = ArrayList<SongInfo>()
+    companion object{
+        val PERMISSION_REQUEST_CODE = 12
+    }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
 
 //        LoadData("%")
 //
@@ -43,17 +39,18 @@ open class MainActivity : AppCompatActivity() {
 //        val ID = dbManager.Insert(values)
 
 
-        val fragmentAdapter = MyPagerAdapter(supportFragmentManager)
+        val fragmentAdapter = MyPagerAdapter(
+            supportFragmentManager
+        )
         viewPager.adapter = fragmentAdapter
         tabLayout.setupWithViewPager(viewPager)
+
+        tabLayout.getTabAt(3)!!.setIcon(R.drawable.ic_baseline_favorite_24)
 
     }
 
 
-
-
-
-    //ToDo fix this
+    //ToDo: fix this    Data base
 //   code data base
     fun LoadData (title: String)
     {
@@ -73,7 +70,13 @@ open class MainActivity : AppCompatActivity() {
                 val SongURL = cursor.getString(cursor.getColumnIndex("SongURL"))
 
 
-                listofsongs.add(SongInfo(ID.toString(), Title, Artist))
+                listofsongs.add(
+                    SongInfo(
+                        ID.toString(),
+                        Title,
+                        Artist
+                    )
+                )
 
             }while (cursor.moveToNext())
         }
@@ -85,7 +88,8 @@ open class MainActivity : AppCompatActivity() {
 
     }
 
-    //    Todo: fix this 
+    //ToDo: fix this    Search
+
     //    source search
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu,menu)
@@ -108,6 +112,9 @@ open class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
 
     }
+
+
+
 
 
 }

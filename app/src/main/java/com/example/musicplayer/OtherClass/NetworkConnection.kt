@@ -1,6 +1,6 @@
 @file:Suppress("DEPRECATION")
 
-package com.example.musicplayer
+package com.example.musicplayer.OtherClass
 
 import android.annotation.TargetApi
 import android.content.BroadcastReceiver

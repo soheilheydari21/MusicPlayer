@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#000000"
     android:orientation="vertical"
-    tools:context=".FragmentThree">
+    tools:context=".Fragments.FragmentThree">
 
     <TextView
         android:id="@+id/textViewComingSoon"

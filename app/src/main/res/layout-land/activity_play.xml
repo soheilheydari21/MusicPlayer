@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/matt1"
-    tools:context=".PlayActivity">
+    tools:context=".Activity.PlayActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,9 +17,11 @@
 
     <com.rishabhharit.roundedimageview.RoundedImageView
         android:id="@+id/circularImageView"
-        android:layout_width="365dp"
-        android:layout_height="365dp"
-        android:layout_marginStart="40dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
         android:src="@drawable/coverrrl"
         app:civ_border_color="#00d6b3"
         app:civ_border_width="3dp"
@@ -28,13 +30,14 @@
         app:civ_shadow_radius="7dp"
         app:cornerRadius="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.428"
         app:roundedCorners="all" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="375dp"
+        android:layout_width="320dp"
         android:layout_height="0dp"
         android:background="@drawable/background_playland"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -45,7 +48,7 @@
             android:id="@+id/currentTimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="224dp"
+            android:layout_marginEnd="200dp"
             android:text="00:00"
             android:textColor="#FFFFFF"
             android:textSize="15sp"
@@ -58,11 +61,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="15dp"
             android:maxLength="21"
             android:text="Artist"
             android:textColor="#DDDDDD"
-            android:textSize="20sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/seekBar"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="Mohammad Rza Golzar" />
@@ -72,11 +75,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="4dp"
             android:maxLength="21"
             android:text="Title"
             android:textColor="#FFFFFF"
-            android:textSize="25sp"
+            android:textSize="21sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/textViewArtist"
             app:layout_constraintStart_toStartOf="parent"
@@ -85,8 +88,8 @@
 
         <ImageView
             android:id="@+id/btnForward"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="29dp"
+            android:layout_height="29dp"
             android:layout_marginEnd="15dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageTekrar"
             app:layout_constraintEnd_toStartOf="@+id/imageTekrar"
@@ -97,19 +100,20 @@
 
         <ImageView
             android:id="@+id/imageHeart"
-            android:layout_width="37dp"
-            android:layout_height="37dp"
-            android:layout_marginEnd="27dp"
-            android:layout_marginBottom="37dp"
+            android:layout_width="29dp"
+            android:layout_height="29dp"
+            android:layout_marginEnd="26dp"
+            android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toTopOf="@+id/seekBar"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/heart" />
 
         <ImageView
             android:id="@+id/imagePause"
-            android:layout_width="54dp"
-            android:layout_height="65dp"
+            android:layout_width="48dp"
+            android:layout_height="62dp"
             android:layout_marginEnd="15dp"
+            android:paddingLeft="2dp"
             app:layout_constraintBottom_toBottomOf="@+id/btnForward"
             app:layout_constraintEnd_toStartOf="@+id/btnForward"
             app:layout_constraintHorizontal_bias="0.5"
@@ -119,8 +123,10 @@
 
         <SeekBar
             android:id="@+id/seekBar"
-            android:layout_width="325dp"
-            android:layout_height="35dp"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
             android:progressBackgroundTint="#FFFDFD"
             android:progressTint="#00CCB9"
             app:layout_constraintBottom_toTopOf="@+id/totalTimer"
@@ -129,9 +135,9 @@
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="30dp"
+            android:layout_width="27dp"
+            android:layout_height="26dp"
+            android:layout_marginEnd="26dp"
             android:layout_marginBottom="25dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -141,7 +147,7 @@
             android:id="@+id/totalTimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="38dp"
+            android:layout_marginEnd="24dp"
             android:layout_marginBottom="20dp"
             android:text="00:00"
             android:textColor="#FFFFFF"
@@ -152,18 +158,18 @@
 
         <ImageView
             android:id="@+id/imageSpeaker"
-            android:layout_width="37dp"
-            android:layout_height="37dp"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
             android:layout_marginTop="23dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="26dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/speaker" />
 
         <ImageView
             android:id="@+id/imageTekrar"
-            android:layout_width="33dp"
-            android:layout_height="33dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="25dp"
             app:layout_constraintBottom_toTopOf="@+id/imageView4"
@@ -174,8 +180,8 @@
 
         <ImageView
             android:id="@+id/btnBackward"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="29dp"
+            android:layout_height="29dp"
             android:layout_marginEnd="15dp"
             app:layout_constraintBottom_toBottomOf="@+id/imagePause"
             app:layout_constraintEnd_toStartOf="@+id/imagePause"
@@ -186,8 +192,8 @@
 
         <ImageView
             android:id="@+id/randomButton"
-            android:layout_width="33dp"
-            android:layout_height="33dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             app:layout_constraintBottom_toBottomOf="@+id/btnBackward"
@@ -199,8 +205,8 @@
 
         <ImageView
             android:id="@+id/baseline"
-            android:layout_width="33dp"
-            android:layout_height="33dp"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
             android:layout_marginBottom="25dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/randomButton"

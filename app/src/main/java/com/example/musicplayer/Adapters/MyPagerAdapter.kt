@@ -1,8 +1,12 @@
-package com.example.musicplayer
+package com.example.musicplayer.Adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.musicplayer.Fragments.FragmentFour
+import com.example.musicplayer.Fragments.FragmentOne
+import com.example.musicplayer.Fragments.FragmentThree
+import com.example.musicplayer.Fragments.FragmentTwo
 
 class MyPagerAdapter (fm : FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {
@@ -32,8 +36,10 @@ class MyPagerAdapter (fm : FragmentManager) : FragmentPagerAdapter(fm) {
             1-> "Online"
             2-> "Album"
             else-> {
-                return "Favourites"
+                return ""
+
             }
+
         }
     }
 }

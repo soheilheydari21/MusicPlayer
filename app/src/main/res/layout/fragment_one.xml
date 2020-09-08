@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".FragmentOne">
+    tools:context=".Fragments.FragmentOne">
 
     <ListView
         android:id="@+id/listVewSong"
@@ -16,6 +16,7 @@
     </ListView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/navarLayout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@drawable/background_navar_play"
