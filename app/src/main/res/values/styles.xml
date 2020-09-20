@@ -16,8 +16,8 @@
     </style>
 
     <style name="playLayout" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">#EC151515</item>
-        <item name="colorPrimaryDark">#F3000000</item>
+        <item name="colorPrimary">#F01E1D1D</item>
+        <item name="colorPrimaryDark">#EB00331E</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 

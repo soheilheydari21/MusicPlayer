@@ -6,7 +6,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.database.sqlite.SQLiteQueryBuilder
-import android.widget.Toast
+import com.example.musicplayer.Activity.MainActivity
 
 class DBManager {
 
@@ -22,7 +22,7 @@ class DBManager {
 
     var sqlDB:SQLiteDatabase ?= null
 
-    constructor(context : Context)
+    constructor(context: MainActivity)
     {
         val db = DatabaseHelper(context)
         sqlDB = db.writableDatabase
@@ -31,7 +31,6 @@ class DBManager {
     inner class DatabaseHelper : SQLiteOpenHelper
     {
         var context: Context ?= null
-
         constructor(context: Context): super(context, dbName, null, dbVertion)
         {
             this.context = context

@@ -46,7 +46,7 @@
         app:srcCompat="@drawable/speaker" />
 
     <com.rishabhharit.roundedimageview.RoundedImageView
-        android:id="@+id/circularImageView"
+        android:id="@+id/coverPlayActivity"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="30dp"
@@ -87,21 +87,19 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/currentTimer"
+        android:id="@+id/elapsedTimeLable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginBottom="14dp"
         android:text="00:00"
         android:textColor="#FFFFFF"
         android:textSize="13sp"
         app:layout_constraintBottom_toTopOf="@+id/randomButton"
         app:layout_constraintEnd_toStartOf="@+id/totalTimer"
-        app:layout_constraintHorizontal_bias="0.098"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/seekBar" />
 
     <TextView
-        android:id="@+id/textViewArtist"
+        android:id="@+id/textViewArtist2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -110,7 +108,7 @@
         android:textColor="#DDDDDD"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/seekBar"
-        app:layout_constraintStart_toStartOf="@+id/currentTimer"
+        app:layout_constraintStart_toStartOf="@+id/seekBar"
         tools:text="Mohammad Rza Golzar" />
 
     <TextView
@@ -123,8 +121,8 @@
         android:textColor="#FFFFFF"
         android:textSize="21sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textViewArtist"
-        app:layout_constraintStart_toStartOf="@+id/currentTimer"
+        app:layout_constraintBottom_toTopOf="@+id/textViewArtist2"
+        app:layout_constraintStart_toStartOf="@+id/textViewArtist2"
         tools:text="Behem Kheyli Bad Kardi" />
 
     <ImageView
@@ -157,7 +155,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnBackward"
         app:layout_constraintTop_toTopOf="@+id/btnBackward"
-        app:srcCompat="@drawable/play" />
+        app:srcCompat="@drawable/pause" />
 
     <SeekBar
         android:id="@+id/seekBar"
@@ -182,16 +180,15 @@
         app:srcCompat="@drawable/more" />
 
     <TextView
-        android:id="@+id/totalTimer"
+        android:id="@+id/remaningTimeLable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
         android:layout_marginBottom="15dp"
         android:text="00:00"
         android:textColor="#FFFFFF"
         android:textSize="13sp"
         app:layout_constraintBottom_toTopOf="@+id/imageTekrar"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/seekBar"
         tools:text="03:15" />
 
     <ImageView

@@ -2,10 +2,13 @@ package com.example.musicplayer.Activity
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.widget.*
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.musicplayer.Adapters.MyPagerAdapter
 import com.example.musicplayer.Adapters.MySongAdapter
 import com.example.musicplayer.DataBace.DBManager
@@ -22,41 +25,42 @@ open class MainActivity : AppCompatActivity() {
     }
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Request allo
+        if (ContextCompat.checkSelfPermission(applicationContext, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                MainActivity.PERMISSION_REQUEST_CODE
+            )
+        else
+        {
+            loadData()
+        }
 
-
+        // Search
 //        LoadData("%")
-//
+
 //        var dbManager = DBManager(this)
 //        var values = ContentValues()
 //        values.put("Title", findViewById<TextView>(R.id.textViewTitle).text.toString())
 //        values.put("Artist", findViewById<TextView>(R.id.textViewArtist).text.toString())
-//
+
 //        val ID = dbManager.Insert(values)
 
 
-        val fragmentAdapter = MyPagerAdapter(
-            supportFragmentManager
-        )
-        viewPager.adapter = fragmentAdapter
-        tabLayout.setupWithViewPager(viewPager)
-
-        tabLayout.getTabAt(3)!!.setIcon(R.drawable.ic_baseline_favorite_24)
-
     }
 
-
-    //ToDo: fix this    Data base
-//   code data base
+   //ToDo: fix this    Data base
+    // code data base
     fun LoadData (title: String)
     {
         var dbManager = DBManager(this)
-
-        val columns = arrayOf("ID", "Title", "Artist")
+        val columns = arrayOf("ID", "Title", "Artist", "Allbum")
         val selectionArgs = arrayOf(title)
         val cursor = dbManager.RunQuery(columns,"Title like ?", selectionArgs,"Title")
 
@@ -68,13 +72,14 @@ open class MainActivity : AppCompatActivity() {
                 val Title = cursor.getString(cursor.getColumnIndex("Title"))
                 val Artist = cursor.getString(cursor.getColumnIndex("Artist"))
                 val SongURL = cursor.getString(cursor.getColumnIndex("SongURL"))
-
+                val Allbum =cursor.getString(cursor.getColumnIndex("Allbum"))
 
                 listofsongs.add(
                     SongInfo(
                         ID.toString(),
                         Title,
-                        Artist
+                        Artist,
+                        Allbum
                     )
                 )
 
@@ -84,13 +89,10 @@ open class MainActivity : AppCompatActivity() {
 //        adapter = MySongAdapter(this ,listofsongs)
 //        listVewSong.adapter = adapter
 
-
-
     }
 
     //ToDo: fix this    Search
-
-    //    source search
+     //  source search
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu,menu)
 
@@ -114,8 +116,30 @@ open class MainActivity : AppCompatActivity() {
     }
 
 
+    //  Requested allo 2
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == MainActivity.PERMISSION_REQUEST_CODE){
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(applicationContext, "Permission Granted", Toast.LENGTH_SHORT).show()
+                loadData()
+            }
+        }
+    }
 
+    fun loadData() {
+        val fragmentAdapter = MyPagerAdapter(
+            supportFragmentManager
+        )
+        viewPager.adapter = fragmentAdapter
+        tabLayout.setupWithViewPager(viewPager)
 
+        tabLayout.getTabAt(3)!!.setIcon(R.drawable.ic_baseline_favorite_24)
+
+    }
 
 }
 

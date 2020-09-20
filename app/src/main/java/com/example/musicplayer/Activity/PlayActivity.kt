@@ -2,49 +2,55 @@
 
 package com.example.musicplayer.Activity
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
-import android.content.Context.*
 import android.content.Intent
 import android.media.AudioManager
+import android.media.MediaPlayer
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.RemoteViews
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat
+import androidx.core.view.get
+import androidx.core.view.size
+//import com.example.musicplayer.Activity.PlayActivity.seecbar.*
+import com.example.musicplayer.Adapters.MySongAdapter
+import com.example.musicplayer.Adapters.changTextArtist
+import com.example.musicplayer.Adapters.changTextTitle
 import com.example.musicplayer.Adapters.mediaPlayer
 import com.example.musicplayer.R
 import com.example.musicplayer.OtherClass.SongInfo
 //import com.example.musicplayer.Activity.PlayActivity.seecbar.mySongThread
 import kotlinx.android.synthetic.main.activity_play.*
+import kotlinx.android.synthetic.main.fragment_one.*
+import java.io.InterruptedIOException
 import kotlin.random.Random
-
 
 
 //@ExperimentalTime
 class PlayActivity : AppCompatActivity() {
 
-    //ToDo: this fixes    Notification
-
-
+    //  Notification
     var listofsongs = ArrayList<SongInfo>()
     var adapter: PlaySongAdapter<Any>?= null
-
     private var CHANNEL_ID = "Your_Channel_ID";
+    private var totalTime: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_play)
 
-        //ToDo: this fixes    Notification 2
+        totalTime = mediaPlayer!!.duration
+
+        //  Notification 2
         CreatNotificationChannel()
         val notificationLayout = RemoteViews(packageName,R.layout.notification)
         var builder = NotificationCompat.Builder(this,CHANNEL_ID)
@@ -54,17 +60,24 @@ class PlayActivity : AppCompatActivity() {
             .setCustomContentView(notificationLayout)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
-
-
-
+        // Set text Artist & Title
+        textViewTitle2.setText(changTextTitle)
+        textViewArtist2.setText(changTextArtist)
 
         adapter = PlaySongAdapter(listofsongs)
 
-//        var mySongAdapter = seecbar<mySongThread>()
-//        seecbar.mySongThread().start()
+        //ToDo Sicbarr
+        var mySongAdapter = mySongThread()
+        mySongThread().start()
+
+        coverPlayActivity.setOnClickListener {
+            //  Notification 3
+            with(NotificationManagerCompat.from(this)){
+                notify(0,builder.build())
+            }
+        }
 
         var flag = 0
-
         imageHeart.setOnClickListener {
             if (flag == 0) {
                 imageHeart.setImageResource(R.drawable.heart1);
@@ -76,84 +89,120 @@ class PlayActivity : AppCompatActivity() {
             }
         }
 
-        imagePause.setOnClickListener {
-
-
-
-            if (flag == 0) {
-                imagePause.setImageResource(R.drawable.play);
-                flag = 1;
-//                mediaPlayer!!.Pause()
-
-
-               //ToDo: this fixes    Notification 3
-
-                with(NotificationManagerCompat.from(this)){
-                    notify(0,builder.build())
+        //seekBar
+        seekBar.max = mediaPlayer!!.duration
+        seekBar.setOnSeekBarChangeListener(
+            object : SeekBar.OnSeekBarChangeListener{
+                override fun onProgressChanged(
+                    seekBar: SeekBar?,
+                    progress: Int,
+                    fromUser: Boolean
+                ) {
+                    if (fromUser)
+                    {
+                        mediaPlayer!!.seekTo(progress)
+                    }
                 }
 
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                }
 
-            }else if (flag == 1){
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                }
+            }
+        )
+
+        Thread(Runnable {
+            while (mediaPlayer!= null){
+                try {
+                    var msg = Message()
+                    msg.what = mediaPlayer!!.currentPosition
+                    handler.sendMessage(msg)
+                    Thread.sleep(1000)
+                }catch (e: InterruptedException){
+
+                }
+            }
+        }).start()
+
+
+        imagePause.setOnClickListener {
+            if (mediaPlayer!!.isPlaying) {
+                imagePause.setImageResource(R.drawable.play);
+                mediaPlayer!!.pause()
+
+            }else {
                 imagePause.setImageResource(R.drawable.pause);
-                flag = 0;
-//                mediaPlayer!!.start()
+                mediaPlayer!!.start()
+
             }
         }
 
-
-
+        var isRepeat = false
+        var isShuffle = false
+        //btn Shuffle
         randomButton.setOnClickListener {
-            if (flag == 0) {
-                randomButton.setImageResource(R.drawable.random1);
-                flag = 1;
-            }else if (flag == 1){
+            if (isShuffle) {
                 randomButton.setImageResource(R.drawable.random);
-                flag = 0;
+                isShuffle = false;
+
+            }else{
+                randomButton.setImageResource(R.drawable.random1);
+                isShuffle = true;
+                imageTekrar.setImageResource(R.drawable.refresh);
+                isRepeat = false;
+
             }
         }
 
+        //btn Repeat
         imageTekrar.setOnClickListener {
-            if (flag == 0) {
-                imageTekrar.setImageResource(R.drawable.refresh1);
-                flag = 1;
-            }else if (flag == 1){
+            if (isRepeat) {
                 imageTekrar.setImageResource(R.drawable.refresh);
-                flag = 0;
+                isRepeat = false;
+
+            }else{
+                imageTekrar.setImageResource(R.drawable.refresh1);
+                isRepeat = true;
+                randomButton.setImageResource(R.drawable.random);
+                isShuffle = false;
 
             }
         }
 
         //ToDo: fix this    Btn forward
-        //btnForward
+        //btn Next
         var forwardTime: Int = 5000
         var playTime: Int = 0
         var endTime: Int = 0
+
         btnForward.setOnClickListener {
             if ((playTime + forwardTime) <= endTime) {
                 playTime += forwardTime
                 mediaPlayer!!.seekTo(playTime)
             }
+
             else if (!imagePause.isEnabled) {
                 imagePause.isEnabled = true
             }
-
         }
 
         //ToDo: fix this    Btn backward
-        //btnBackward
+        //btn Preview
         var backwardTime: Int = 5000
+
         btnBackward.setOnClickListener {
             if ((playTime - backwardTime) > 0) {
                 playTime -= backwardTime
                 mediaPlayer!!.seekTo(playTime)
             }
+
             else if (!imagePause.isEnabled) {
                 imagePause.isEnabled = true
             }
         }
 
         imageSpeaker.setOnClickListener {
-
                 val audioManager: AudioManager =getSystemService(Context.AUDIO_SERVICE) as AudioManager
                 val maxVolume = audioManager.mediaMaxVolume
                 val randomIndex = Random.nextInt(((maxVolume - 0) + 1) + 0)
@@ -177,6 +226,7 @@ class PlayActivity : AppCompatActivity() {
             AudioManager.FLAG_SHOW_UI
         )
     }
+
     val AudioManager.mediaMaxVolume:Int
     get() = this.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
 
@@ -185,7 +235,6 @@ class PlayActivity : AppCompatActivity() {
 
 //    fun Context.toast(message: String) {
 //        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-//
 //    }
 
 //ToDo: this fixed
@@ -196,14 +245,13 @@ class PlayActivity : AppCompatActivity() {
         {
             this.playListSong = playListSong
         }
-
-
+        
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             val playView = layoutInflater.inflate(R.layout.row_layout,null)
             val playSong = this.playListSong[position]
 
             playView.findViewById<TextView>(R.id.textViewTitle2).setText(playSong.Title)
-            playView.findViewById<TextView>(R.id.textViewArtist).setText(playSong.Desc)
+            playView.findViewById<TextView>(R.id.textViewArtist2).setText(playSong.Desc)
 
             return playView
         }
@@ -220,34 +268,35 @@ class PlayActivity : AppCompatActivity() {
             return this.playListSong.size
         }
 
-
     }
 
-    //Todo: fix this    Timer sicbar
+    //seekBar 2
+    @SuppressLint("HandlerLeak")
+    var handler = object : Handler()
+    {
+        override fun handleMessage(msg: Message) {
+            var currentPosition = msg.what
+            seekBar.progress = currentPosition
+            var elapsedTime = createTimeLable(currentPosition)
+            elapsedTimeLable.text = elapsedTime
 
-//    class seecbar<T> : MainActivity(MySongAdapter) {
-//
-//       inner class mySongThread : Thread() {
-//          override fun run() {
-//              while (true) {
-//                  try {
-//                     Thread.sleep(1000)
-//                  } catch (ex: Exception) {
-//
-//                  }
-//                  runOnUiThread {
-//                     if (mediaPlayer != null) {
-//                        seekBar.progress = mediaPlayer!!.currentPosition
-//                     }
-//                  }
-//              }
-//          }
-//
-//       }
-//    }
+            var remaningTime = createTimeLable(totalTime - currentPosition)
+            remaningTimeLable.text = "-$remaningTime"
+        }
+    }
 
+    fun createTimeLable(time: Int): String {
+        var timeLable = ""
+        var min = time / 1000 / 60
+        var sec = time / 1000 % 60
 
-    //ToDo: this fixes    Notification 4
+        timeLable = "$min:"
+        if (sec < 10) timeLable += "0"
+        timeLable += sec
+        return timeLable
+    }
+
+    //  Notification 4
     private fun CreatNotificationChannel()
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
@@ -261,6 +310,28 @@ class PlayActivity : AppCompatActivity() {
 
             val notificationManager : NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+
+    inner class mySongThread() : Thread()
+    {
+        override fun run() {
+            while (true)
+            {
+                try {
+                    Thread.sleep(1000)
+                }
+                catch (ex:Exception)
+                {
+                }
+                runOnUiThread {
+                    if (mediaPlayer!= null)
+                    {
+                        seekBar.progress = mediaPlayer!!.currentPosition
+                    }
+                }
+            }
         }
     }
 

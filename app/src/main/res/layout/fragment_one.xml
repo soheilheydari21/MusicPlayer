@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.FragmentOne">
+    tools:context=".Fragments.FragmentOne"
+    android:id="@+id/listLayout">
 
     <ListView
         android:id="@+id/listVewSong"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:divider="@null">
 
     </ListView>
@@ -26,9 +28,9 @@
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="15dp"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginEnd="13dp"
             android:src="@drawable/next_navar"
             app:layout_constraintBottom_toBottomOf="@+id/imageViewPlayN"
             app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +40,6 @@
             android:id="@+id/imageViewPlayN"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginEnd="5dp"
             android:src="@drawable/play_navar"
             app:layout_constraintBottom_toBottomOf="@+id/imageView7"
             app:layout_constraintEnd_toStartOf="@+id/imageView3"
@@ -46,9 +47,8 @@
 
         <ImageView
             android:id="@+id/imageView7"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="5dp"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
             android:src="@drawable/back_navar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageViewPlayN"
@@ -69,11 +69,11 @@
             android:id="@+id/textViewTitleN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="1dp"
+            android:layout_marginStart="7dp"
+            android:maxLength="16"
             android:text="title"
             android:textColor="#FFFFFF"
-            android:textSize="22sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/textViewArtistN"
             app:layout_constraintStart_toEndOf="@+id/imageView8"
             tools:text="title" />
@@ -82,8 +82,8 @@
             android:id="@+id/textViewArtistN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginBottom="8dp"
             android:text="artist"
             android:textColor="#BCBCBC"
             android:textSize="16sp"
@@ -92,4 +92,4 @@
             tools:text="artist" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

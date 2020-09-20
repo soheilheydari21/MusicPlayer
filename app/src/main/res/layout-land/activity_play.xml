@@ -57,32 +57,30 @@
             app:layout_constraintTop_toTopOf="@+id/totalTimer" />
 
         <TextView
-            android:id="@+id/textViewArtist"
+            android:id="@+id/textViewArtist2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
             android:layout_marginBottom="15dp"
             android:maxLength="21"
             android:text="Artist"
             android:textColor="#DDDDDD"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/seekBar"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/seekBar"
             tools:text="Mohammad Rza Golzar" />
 
         <TextView
             android:id="@+id/textViewTitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
             android:layout_marginBottom="4dp"
             android:maxLength="21"
             android:text="Title"
             android:textColor="#FFFFFF"
             android:textSize="21sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textViewArtist"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/textViewArtist2"
+            app:layout_constraintStart_toStartOf="@+id/textViewArtist2"
             tools:text="Behem Kheyli Bad Kardi" />
 
 
@@ -119,7 +117,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btnBackward"
             app:layout_constraintTop_toTopOf="@+id/btnForward"
-            app:srcCompat="@drawable/play" />
+            app:srcCompat="@drawable/pause" />
 
         <SeekBar
             android:id="@+id/seekBar"

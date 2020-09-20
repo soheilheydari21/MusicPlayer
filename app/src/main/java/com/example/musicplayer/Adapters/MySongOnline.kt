@@ -9,12 +9,14 @@ import android.view.ViewGroup
 import android.widget.*
 import com.example.musicplayer.R
 import com.example.musicplayer.OtherClass.SongInfo
+import com.example.musicplayer.OtherClass.SongOnline
+import com.rishabhharit.roundedimageview.RoundedImageView
 
 //var mediaPlayerOnline: MediaPlayer? = null
 
-class MySongOnline(context: Context, myListSong: ArrayList<SongInfo>) : BaseAdapter() {
+class MySongOnline(context: Context, myListSong: ArrayList<SongOnline>) : BaseAdapter() {
 
-    var myListSong = ArrayList<SongInfo>()
+    var myListSong = ArrayList<SongOnline>()
     private val nContext: Context
 
     init {
@@ -28,14 +30,12 @@ class MySongOnline(context: Context, myListSong: ArrayList<SongInfo>) : BaseAdap
         val myView = layoutInflate.inflate(R.layout.row_online_layout,parent,false)
         val song = this.myListSong[position]
 
-
         myView.findViewById<TextView>(R.id.textViewTitle).text = song.Title
         myView.findViewById<TextView>(R.id.textViewDesc).text = song.Desc
-//        myView.findViewById<ImageView>(R.id.coverMusic).
+        song.Cover?.let { myView.findViewById<RoundedImageView>(R.id.coverMusic).setImageResource(it) }
 
         var flage = 0
         myView.findViewById<ImageView>(R.id.imageViewDownload).setOnClickListener {
-
             if (flage == 0)
             {
                 myView.findViewById<ImageView>(R.id.imageViewDownload).setImageResource(
@@ -45,23 +45,20 @@ class MySongOnline(context: Context, myListSong: ArrayList<SongInfo>) : BaseAdap
 //                Toast.makeText(nContext,"Loading...",Toast.LENGTH_SHORT).show()
 
                 mediaPlayer = MediaPlayer()
-
                 mediaPlayer!!.setDataSource(song.SongURL)
                 mediaPlayer!!.prepare()
                 mediaPlayer!!.start()
-
             }
+
             else if (flage == 1)
             {
                 myView.findViewById<ImageView>(R.id.imageViewDownload).setImageResource(
                     R.drawable.play_download
                 );
                 flage = 0;
-
                 mediaPlayer!!.stop()
             }
         }
-
         return myView
 
     }
@@ -78,3 +75,5 @@ class MySongOnline(context: Context, myListSong: ArrayList<SongInfo>) : BaseAdap
         return this.myListSong.size
     }
 }
+
+

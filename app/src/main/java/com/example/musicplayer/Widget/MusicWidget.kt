@@ -10,6 +10,7 @@ import com.example.musicplayer.R
  * Implementation of App Widget functionality.
  */
 class MusicWidget : AppWidgetProvider() {
+
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,

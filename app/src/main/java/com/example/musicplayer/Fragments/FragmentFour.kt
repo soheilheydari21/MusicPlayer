@@ -10,7 +10,6 @@ import com.example.musicplayer.R
 
 class FragmentFour : Fragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
