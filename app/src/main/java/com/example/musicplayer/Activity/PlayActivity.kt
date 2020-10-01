@@ -21,13 +21,12 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.get
 import androidx.core.view.size
+import com.example.musicplayer.Adapters.*
 //import com.example.musicplayer.Activity.PlayActivity.seecbar.*
-import com.example.musicplayer.Adapters.MySongAdapter
-import com.example.musicplayer.Adapters.changTextArtist
-import com.example.musicplayer.Adapters.changTextTitle
-import com.example.musicplayer.Adapters.mediaPlayer
 import com.example.musicplayer.R
 import com.example.musicplayer.OtherClass.SongInfo
+import com.example.musicplayer.Servis.DataServis
+import com.example.musicplayer.Servis.DataServis.Companion.playSong
 //import com.example.musicplayer.Activity.PlayActivity.seecbar.mySongThread
 import kotlinx.android.synthetic.main.activity_play.*
 import kotlinx.android.synthetic.main.fragment_one.*
@@ -66,7 +65,7 @@ class PlayActivity : AppCompatActivity() {
 
         adapter = PlaySongAdapter(listofsongs)
 
-        //ToDo Sicbarr
+        // Sicbarr
         var mySongAdapter = mySongThread()
         mySongThread().start()
 
@@ -77,15 +76,15 @@ class PlayActivity : AppCompatActivity() {
             }
         }
 
-        var flag = 0
+        var isLike = true
         imageHeart.setOnClickListener {
-            if (flag == 0) {
+            if (isLike) {
                 imageHeart.setImageResource(R.drawable.heart1);
-                flag = 1;
+                isLike = false;
                 Toast.makeText(this," Add song to Favourite list ",Toast.LENGTH_SHORT).show()
-            }else if (flag == 1){
+            }else if (isLike == false){
                 imageHeart.setImageResource(R.drawable.heart)
-                flag = 0;
+                isLike = true;
             }
         }
 
@@ -138,9 +137,11 @@ class PlayActivity : AppCompatActivity() {
             }
         }
 
+        //ToDo this fixes   btnShuffle
+        //btn Shuffle
         var isRepeat = false
         var isShuffle = false
-        //btn Shuffle
+
         randomButton.setOnClickListener {
             if (isShuffle) {
                 randomButton.setImageResource(R.drawable.random);
@@ -155,6 +156,7 @@ class PlayActivity : AppCompatActivity() {
             }
         }
 
+        //ToDo this fixes    btnRepeat
         //btn Repeat
         imageTekrar.setOnClickListener {
             if (isRepeat) {
@@ -170,38 +172,66 @@ class PlayActivity : AppCompatActivity() {
             }
         }
 
-        //ToDo: fix this    Btn forward
-        //btn Next
-        var forwardTime: Int = 5000
-        var playTime: Int = 0
-        var endTime: Int = 0
+        //ToDo this fixes    mediaPlayer
+//        mediaPlayer!!.setOnCompletionListener {
+//            if (isRepeat)
+//            {
+//                playSong(currentSongIndex)
+//
+//            }
+//            else if (isShuffle)
+//            {
+//                var rand:Random = Random
+//                currentSongIndex=rand.nextInt((myListSong.size()-1));
+//                playSong(currentSongIndex)
+//
+//            }
+//            else
+//            {
+//                if (currentSongIndex<(myListSong.size()-1))
+//                {
+//                    playSong(currentSongIndex+1);
+//                    currentSongIndex=currentSongIndex+1;
+//
+//                }
+//                else
+//                {
+//                    playSong(0);
+//                    currentSongIndex=0;
+//
+//                }
+//
+//            }
+//        }
+
+        //btn forward
+        var currentPosition: Int = 0
+        var duration = mediaPlayer!!.getDuration()
 
         btnForward.setOnClickListener {
-            if ((playTime + forwardTime) <= endTime) {
-                playTime += forwardTime
-                mediaPlayer!!.seekTo(playTime)
-            }
+            currentPosition = mediaPlayer!!.getCurrentPosition()
 
-            else if (!imagePause.isEnabled) {
-                imagePause.isEnabled = true
+            if(mediaPlayer!!.isPlaying() && duration != currentPosition)
+            {
+                currentPosition = currentPosition + 5000
+                mediaPlayer!!.seekTo(currentPosition)
             }
         }
 
-        //ToDo: fix this    Btn backward
-        //btn Preview
+        //btn backward
         var backwardTime: Int = 5000
 
         btnBackward.setOnClickListener {
-            if ((playTime - backwardTime) > 0) {
-                playTime -= backwardTime
-                mediaPlayer!!.seekTo(playTime)
-            }
+            currentPosition = mediaPlayer!!.getCurrentPosition()
 
-            else if (!imagePause.isEnabled) {
-                imagePause.isEnabled = true
+            if(mediaPlayer!!.isPlaying() && currentPosition > 5000)
+            {
+                currentPosition = currentPosition - 5000
+                mediaPlayer!!.seekTo(currentPosition)
             }
         }
 
+        // btn Speaker
         imageSpeaker.setOnClickListener {
                 val audioManager: AudioManager =getSystemService(Context.AUDIO_SERVICE) as AudioManager
                 val maxVolume = audioManager.mediaMaxVolume

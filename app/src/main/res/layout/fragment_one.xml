@@ -21,13 +21,30 @@
         android:id="@+id/navarLayout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@drawable/background_navar_play"
+        android:background="#00FBFAFA"
+        android:backgroundTint="#00FFFFFF"
+        android:foregroundTint="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/listVewSong"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <ImageView
+        <com.rishabhharit.roundedimageview.RoundedImageView
             android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#00FFFFFF"
+            android:backgroundTint="#FFFFFF"
+            android:scaleType="center"
+            android:src="@drawable/back_navar_music"
+            app:cornerRadius="22dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:roundedCorners="top" />
+
+        <ImageView
+            android:id="@+id/nextButtonN"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_marginEnd="13dp"
@@ -41,12 +58,12 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/play_navar"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView7"
-            app:layout_constraintEnd_toStartOf="@+id/imageView3"
-            app:layout_constraintTop_toTopOf="@+id/imageView7" />
+            app:layout_constraintBottom_toBottomOf="@+id/prevButtonN"
+            app:layout_constraintEnd_toStartOf="@+id/nextButtonN"
+            app:layout_constraintTop_toTopOf="@+id/prevButtonN" />
 
         <ImageView
-            android:id="@+id/imageView7"
+            android:id="@+id/prevButtonN"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:src="@drawable/back_navar"
@@ -54,16 +71,17 @@
             app:layout_constraintEnd_toStartOf="@+id/imageViewPlayN"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/imageView8"
+        <com.rishabhharit.roundedimageview.RoundedImageView
+            android:id="@+id/imageViewCoverAllbum2"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="7dp"
+            android:layout_marginStart="10dp"
             android:src="@drawable/coverrrl"
-            app:civ_border_width="1dp"
+            app:cornerRadius="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:roundedCorners="all" />
 
         <TextView
             android:id="@+id/textViewTitleN"
@@ -72,10 +90,12 @@
             android:layout_marginStart="7dp"
             android:maxLength="16"
             android:text="title"
+            android:textAllCaps="false"
             android:textColor="#FFFFFF"
+            android:textColorHighlight="#131313"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/textViewArtistN"
-            app:layout_constraintStart_toEndOf="@+id/imageView8"
+            app:layout_constraintStart_toEndOf="@+id/imageViewCoverAllbum2"
             tools:text="title" />
 
         <TextView
@@ -85,10 +105,10 @@
             android:layout_marginStart="7dp"
             android:layout_marginBottom="8dp"
             android:text="artist"
-            android:textColor="#BCBCBC"
+            android:textColor="#EDE8E8"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView8"
+            app:layout_constraintStart_toEndOf="@+id/imageViewCoverAllbum2"
             tools:text="artist" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

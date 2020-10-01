@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#0C0C0C">
+
+    <com.rishabhharit.roundedimageview.RoundedImageView
+        android:id="@+id/imageViewCoverAllbum3"
+        android:layout_width="390dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/coverrrl"
+        app:cornerRadius="15dp"
+        app:roundedCorners="all"/>
+
+    <com.rishabhharit.roundedimageview.RoundedImageView
+        android:id="@+id/imageViewCoverAllbum2"
+        android:layout_width="380dp"
+        android:layout_height="290dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:scaleType="center"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewCoverAllbum3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/coverrrl"
+        app:cornerRadius="15dp"
+        app:roundedCorners="all"/>
+
+    <com.rishabhharit.roundedimageview.RoundedImageView
+        android:id="@+id/imageViewCoverAllbum"
+        android:layout_width="370dp"
+        android:layout_height="280dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:scaleType="center"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewCoverAllbum3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/coverrrl"
+        app:cornerRadius="15dp"
+        app:roundedCorners="all"
+        app:civ_border_color="#00d6b3"
+        app:civ_border_width="3dp"/>
+
+    <TextView
+        android:id="@+id/textViewTitleAllbum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Titile"
+        android:textColor="#FDFDFD"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewCoverAllbum3" />
+
+    <TextView
+        android:id="@+id/textViewArtistAllbum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="15dp"
+        android:text="TextView"
+        android:textColor="#BFBBBB"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitleAllbum" />
+</androidx.constraintlayout.widget.ConstraintLayout>

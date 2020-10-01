@@ -1,5 +1,6 @@
 package com.example.musicplayer.Adapters
 
+import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -7,6 +8,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.media.MediaPlayer
 import android.os.Build
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,10 +18,13 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.musicplayer.Activity.MainActivity
 import com.example.musicplayer.Activity.PlayActivity
+import com.example.musicplayer.OtherClass.AllbumInfo
 import com.example.musicplayer.R
 import com.example.musicplayer.OtherClass.SongInfo
 import com.rishabhharit.roundedimageview.RoundedImageView
+import kotlinx.android.synthetic.main.activity_play.*
 import kotlinx.android.synthetic.main.row_layout.view.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -31,7 +36,11 @@ var mediaPlayer: MediaPlayer? = null
 var changTextTitle = "Title"
 var changTextArtist = "Artist"
 
- class MySongAdapter(context: Context, myListSong: ArrayList<SongInfo>) : BaseAdapter() {
+//****
+var currentSongIndex = 0
+var test:SongInfo ?= null
+
+class MySongAdapter(context: Context, myListSong: ArrayList<SongInfo>) : BaseAdapter() {
 
      var myListSong = ArrayList<SongInfo>()
      private val mContext: Context
@@ -44,13 +53,27 @@ var changTextArtist = "Artist"
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
             val layoutInflate = LayoutInflater.from(mContext)
-            val myView = layoutInflate.inflate(R.layout.row_layout,parent,false)
+            var myView = layoutInflate.inflate(R.layout.row_layout,parent,false)
             val song = this.myListSong[position]
 
-            myView.findViewById<TextView>(R.id.textViewTitle).text = song.Title
-            myView.findViewById<TextView>(R.id.textViewDesc).text = song.Desc
-//            song.Allbum?.let { myView.findViewById<RoundedImageView>(R.id.coverMusic).setImageResource() }
-//            myView.findViewById<RoundedImageView>(R.id.coverMusic).setImageResource(song.Allbum)
+            val holder : ViewHolder
+            if (convertView == null)
+            {
+                holder = ViewHolder()
+                myView.findViewById<TextView>(R.id.textViewTitle).text = song.Title
+                myView.findViewById<TextView>(R.id.textViewDesc).text = song.Desc
+                myView.tag = holder
+
+            }
+            else
+            {
+                holder = convertView.tag as ViewHolder
+                myView = convertView
+
+            }
+
+//            song.Cover?.let { myView.findViewById<RoundedImageView>(R.id.coverMusic).setImageResource() }
+//            myView.findViewById<RoundedImageView>(R.id.coverMusic).setImageResource(song.Cover)
 
             var flags = 1
             myView.findViewById<LinearLayout>(R.id.PlayMusic).setOnClickListener {
@@ -72,9 +95,10 @@ var changTextArtist = "Artist"
                     myView.findViewById<TextView>(R.id.textViewTitle).setTextColor(Color.parseColor("#13f8d1"))
 
                     changTextTitle = myView.findViewById<TextView>(R.id.textViewTitle).text.toString()
-                    changTextArtist =myView.findViewById<TextView>(R.id.textViewDesc).text.toString()
+                    changTextArtist = myView.findViewById<TextView>(R.id.textViewDesc).text.toString()
                     flags = 0;
                 }
+                test = song
             }
             return myView
 
@@ -93,6 +117,16 @@ var changTextArtist = "Artist"
         }
 
 
+
+}
+
+
+
+class ViewHolder
+{
+//    var myViewImageCover : RoundedImageView? = null
+    var myViewTextTitle : TextView? = null
+    var myViewTextArtist : TextView? = null
 }
 
 

@@ -10,14 +10,14 @@ class SongInfo
     var Title:String ?= null
     var Desc:String ?= null
     var SongURL:String ?= null
-    var Allbum:String ?= null
+    var Cover:String ?= null
 
-    constructor(title:String, desc:String, songURL:String, allbum:String)
+    constructor(title:String, desc:String, songURL:String, cover:String)
     {
         this.Title = title
         this.Desc = desc
         this.SongURL = songURL
-        this.Allbum = allbum
+        this.Cover = cover
     }
 
 
