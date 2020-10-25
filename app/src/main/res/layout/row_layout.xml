@@ -21,6 +21,7 @@
             android:id="@+id/coverMusic"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:scaleType="fitXY"
             app:cornerRadius="15dp"
             app:roundedCorners="all"
             app:srcCompat="@drawable/coverrrl" />
@@ -38,15 +39,19 @@
                 android:id="@+id/textViewTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLength="21"
+                android:layout_marginRight="15dp"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
                 android:paddingLeft="15dp"
-                android:paddingTop="2dp"
+                android:paddingTop="8dp"
                 android:paddingEnd="5dp"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
                 android:text="Title"
                 android:textAlignment="viewStart"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWaith"
-                android:textSize="19sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 tools:text="Behem Kheyli Bad Kardi" />
 
@@ -54,22 +59,24 @@
                 android:id="@+id/textViewDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:ellipsize="marquee"
                 android:fontFamily="sans-serif"
-                android:maxLength="24"
+                android:marqueeRepeatLimit="marquee_forever"
                 android:paddingLeft="15dp"
-                android:paddingTop="5dp"
+                android:paddingTop="1dp"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
                 android:text="Artist"
+                android:textAlignment="viewStart"
                 android:textAllCaps="false"
                 android:textColor="@color/colorTosikam"
-                android:textSize="17sp"
+                android:textSize="15sp"
                 tools:text="Mohammad Reza Golzar" />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"/>
+
     </LinearLayout>
 
 </LinearLayout>

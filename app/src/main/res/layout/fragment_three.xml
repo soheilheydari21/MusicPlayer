@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#000000"
     android:orientation="vertical"
-    tools:context=".Fragments.FragmentThree">
+    tools:context=".Controllers.FragmentFolders">
 
     <TextView
         android:id="@+id/textViewComingSoon"
@@ -17,7 +17,7 @@
         android:textSize="24sp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ReciycleViewAllbum"
+        android:id="@+id/ReciycleViewFolders"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

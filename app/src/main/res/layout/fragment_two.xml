@@ -1,67 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.FragmentTwo"
+    android:background="#000000"
+    tools:context=".Controllers.FragmentAlbums"
     android:animateLayoutChanges="true">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/layoutConnect"
-    android:background="#000000">
-
-    <ListView
-        android:id="@+id/listSongOnline"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-
-
-</LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layoutDisconnect"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ReciycleViewAllbum"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000000"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:scrollbarDefaultDelayBeforeFade="400" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:foregroundGravity="center"
-            android:src="@drawable/desconnected"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="DisConnected"
-            android:textAlignment="center"
-            android:textColor="#CDCDCD"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Please check your internet"
-            android:textAlignment="center"
-            android:textColor="#D5CFCF"
-            android:textSize="18sp" />
-    </LinearLayout>
-
-</FrameLayout>
+</RelativeLayout>

@@ -43,6 +43,7 @@
                 android:maxLength="24"
                 android:paddingLeft="4dp"
                 android:text="Artist"
+                android:textAlignment="viewStart"
                 android:textAllCaps="false"
                 android:textColor="#DA1E1E20"
                 android:textSize="15sp"

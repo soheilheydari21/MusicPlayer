@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/matt"
-    tools:context=".Activity.PlayActivity">
+    tools:context=".Less.PlayActivity">
 
     <!--    <ImageView-->
     <!--        android:id="@+id/imageView"-->
@@ -95,33 +95,49 @@
         android:textColor="#FFFFFF"
         android:textSize="13sp"
         app:layout_constraintBottom_toTopOf="@+id/randomButton"
-        app:layout_constraintEnd_toStartOf="@+id/totalTimer"
         app:layout_constraintStart_toStartOf="@+id/seekBar" />
 
     <TextView
         android:id="@+id/textViewArtist2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
         android:layout_marginBottom="8dp"
-        android:maxLength="23"
+        android:ellipsize="marquee"
+        android:ems="10"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollbars="vertical"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
         android:text="Artist"
+        android:textAlignment="viewStart"
         android:textColor="#DDDDDD"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/seekBar"
+        app:layout_constraintEnd_toStartOf="@+id/imageHeart"
         app:layout_constraintStart_toStartOf="@+id/seekBar"
         tools:text="Mohammad Rza Golzar" />
 
     <TextView
         android:id="@+id/textViewTitle2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="15dp"
         android:layout_marginBottom="2dp"
-        android:maxLength="22"
+        android:ellipsize="marquee"
+        android:ems="10"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollbars="vertical"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
         android:text="Title"
+        android:textAlignment="viewStart"
         android:textColor="#FFFFFF"
         android:textSize="21sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textViewArtist2"
+        app:layout_constraintEnd_toStartOf="@+id/imageHeart"
         app:layout_constraintStart_toStartOf="@+id/textViewArtist2"
         tools:text="Behem Kheyli Bad Kardi" />
 
@@ -155,7 +171,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnBackward"
         app:layout_constraintTop_toTopOf="@+id/btnBackward"
-        app:srcCompat="@drawable/pause" />
+        app:srcCompat="@drawable/play" />
 
     <SeekBar
         android:id="@+id/seekBar"
@@ -180,7 +196,7 @@
         app:srcCompat="@drawable/more" />
 
     <TextView
-        android:id="@+id/remaningTimeLable"
+        android:id="@+id/totalTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"

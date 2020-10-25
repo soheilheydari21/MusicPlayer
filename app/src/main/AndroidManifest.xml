@@ -5,8 +5,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- play for exit -->
     <!-- <uses-permission android:name="android.permission.WAKE_LOCK"/> -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
 
     <application
@@ -16,6 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Less.AlbumActivity"></activity>
+
         <receiver android:name=".Widget.MusicWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -27,23 +27,19 @@
         </receiver>
 
         <activity
-            android:name=".Splash.SpalshScreenActivity"
+            android:name=".Screens.SpalshScreenActivity"
             android:noHistory="true"
             android:theme="@style/SpalshTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".Activity.PlayActivity"
-            android:theme="@style/playLayout">
-        </activity>
-
-        <activity android:name=".Activity.MainActivity">
-        </activity>
-
+            android:name=".Less.PlayActivity"
+            android:theme="@style/playLayout"></activity>
+        <activity android:name=".Less.MainActivity"></activity>
     </application>
 
 </manifest>

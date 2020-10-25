@@ -26,6 +26,7 @@
         android:layout_toEndOf="@+id/imageView5"
         android:layout_toRightOf="@id/imageView5"
         android:text="Track title"
+        android:textAlignment="viewStart"
         android:textColor="#FFFFFF"
         android:textSize="19sp" />
 
@@ -40,6 +41,7 @@
         android:layout_toRightOf="@id/imageView5"
         android:paddingLeft="1dp"
         android:text="artist"
+        android:textAlignment="viewStart"
         android:textColor="#F3EFEF"
         android:textSize="15sp" />
 

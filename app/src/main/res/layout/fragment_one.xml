@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.FragmentOne"
+    tools:context=".Controllers.FragmentTracks"
     android:id="@+id/listLayout">
 
     <ListView
@@ -44,7 +44,7 @@
             app:roundedCorners="top" />
 
         <ImageView
-            android:id="@+id/nextButtonN"
+            android:id="@+id/imageViewNextN"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_marginEnd="13dp"
@@ -58,12 +58,12 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/play_navar"
-            app:layout_constraintBottom_toBottomOf="@+id/prevButtonN"
-            app:layout_constraintEnd_toStartOf="@+id/nextButtonN"
-            app:layout_constraintTop_toTopOf="@+id/prevButtonN" />
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewPreviewN"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewNextN"
+            app:layout_constraintTop_toTopOf="@+id/imageViewPreviewN" />
 
         <ImageView
-            android:id="@+id/prevButtonN"
+            android:id="@+id/imageViewPreviewN"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:src="@drawable/back_navar"
@@ -72,7 +72,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.rishabhharit.roundedimageview.RoundedImageView
-            android:id="@+id/imageViewCoverAllbum2"
+            android:id="@+id/coverNavar"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="10dp"
@@ -85,30 +85,45 @@
 
         <TextView
             android:id="@+id/textViewTitleN"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="7dp"
-            android:maxLength="16"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:ellipsize="marquee"
+            android:ems="10"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollbars="vertical"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
             android:text="title"
-            android:textAllCaps="false"
+            android:textAlignment="viewStart"
             android:textColor="#FFFFFF"
             android:textColorHighlight="#131313"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/textViewArtistN"
-            app:layout_constraintStart_toEndOf="@+id/imageViewCoverAllbum2"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewPreviewN"
+            app:layout_constraintStart_toEndOf="@+id/coverNavar"
             tools:text="title" />
 
         <TextView
             android:id="@+id/textViewArtistN"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="7dp"
+            android:layout_marginEnd="5dp"
             android:layout_marginBottom="8dp"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollbars="vertical"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
             android:text="artist"
+            android:textAlignment="viewStart"
             android:textColor="#EDE8E8"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageViewCoverAllbum2"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewPreviewN"
+            app:layout_constraintStart_toStartOf="@+id/textViewTitleN"
             tools:text="artist" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
