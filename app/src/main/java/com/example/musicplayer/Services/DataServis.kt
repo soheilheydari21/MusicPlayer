@@ -4,16 +4,16 @@ import com.example.musicplayer.Helper.*
 
 class DataServis {
 
-//ToDo  ihgigihgik
+    //ToDo  ihgigihgik
     //*****
-companion object{
-    fun playSong(songIndex:Int = 0)
-    {
+    companion object{
+        fun playSong(songIndex:Int = 0)
+        {
 
-        mediaPlayer!!.reset()
-        mediaPlayer!!.setDataSource(songe!!.SongURL)
-        mediaPlayer!!.prepare()
-        mediaPlayer!!.start()
+            mediaPlayer!!.reset()
+            mediaPlayer!!.setDataSource(songe!!.SongURL)
+            mediaPlayer!!.prepare()
+            mediaPlayer!!.start()
 
 //            var title:String =MySongAdapter.myListSong.get(songIndex).get("title")
 //            songTitle.setText(title);
@@ -31,7 +31,7 @@ companion object{
 ////            e.printStackTrace();
 //        }
 
-    }
+        }
 
 
 //    fun loadAlbumArt(albumId: SongInfo, view:RoundedImageView){
@@ -40,8 +40,7 @@ companion object{
 //        Glide.with(view.getContext()).load(path).into(view);
 //    }
 
-
-}
+    }
 
 
 }

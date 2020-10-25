@@ -1,21 +1,15 @@
 package com.example.musicplayer.Less
 
-import android.app.SearchManager
-import android.content.Context
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
 import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.MenuItemCompat.getActionView
 import com.example.musicplayer.Controllers.FragmentTracks
-import com.example.musicplayer.Database.DBManager
 import com.example.musicplayer.Helper.MyPagerAdapter
 import com.example.musicplayer.Helper.MySongAdapter
-import com.example.musicplayer.Helper.adaptere
 import com.example.musicplayer.R
 import com.example.musicplayer.Models.SongInfo
 import kotlinx.android.synthetic.main.activity_main.*
@@ -56,7 +50,6 @@ open class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
 //        val ID = dbManager.Insert(values)
 
-
     }
 
     private fun loadData() {
@@ -67,42 +60,6 @@ open class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         tabLayout.setupWithViewPager(viewPager)
 
         tabLayout.getTabAt(3)!!.setIcon(R.drawable.ic_baseline_favorite_24)
-
-    }
-
-   //ToDo: fix this    Data base
-    // code data base
-    fun LoadData (title: String)
-    {
-        val dbManager = DBManager(this)
-        val columns = arrayOf("ID", "Title", "Artist", "Allbum")
-        val selectionArgs = arrayOf(title)
-        val cursor = dbManager.RunQuery(columns,"Title like ?", selectionArgs,"Title")
-
-        listofsongs.clear()
-        if (cursor.moveToFirst())
-        {
-            do {
-                val ID = cursor.getInt(cursor.getColumnIndex("ID"))
-                val Title = cursor.getString(cursor.getColumnIndex("Title"))
-                val Artist = cursor.getString(cursor.getColumnIndex("Artist"))
-                val SongURL = cursor.getString(cursor.getColumnIndex("SongURL"))
-                val Allbum =cursor.getString(cursor.getColumnIndex("Allbum"))
-
-//                listofsongs.add(
-//                    SongInfo(
-//                        ID.toString(),
-//                        Title,
-//                        Artist,
-//                        Allbum
-//                    )
-//                )
-
-            }while (cursor.moveToNext())
-        }
-
-        adapter = MySongAdapter(this ,listofsongs)
-        listVewSong.adapter = adapter
 
     }
 
@@ -154,18 +111,6 @@ open class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         val searchView = search!!.actionView as SearchView
         searchView.queryHint="Search something!"
 
-//searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
-//
-////            override fun onQueryTextSubmit(query: String):Boolean{
-////                return false
-////            }
-////
-////            override fun onQueryTextChange(newText:String):Boolean{
-////
-////                listVewSong.filterTouchesWhenObscured
-////                return true
-////            }
-////        })
         FragmentTracks.musicAdapter?.updateList(MySongAdapter.myListSong)
         return super.onCreateOptionsMenu(menu)
     }
@@ -173,12 +118,6 @@ open class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     override fun onQueryTextSubmit(query: String?): Boolean {
         return false
     }
-
-//    override fun onQueryTextChange(newText: String?): Boolean {
-//        listVewSong.filterTouchesWhenObscured
-//        return true
-//    }
-
 
     override fun onQueryTextChange(newText:String):Boolean{
 
