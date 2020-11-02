@@ -2,7 +2,7 @@ package com.example.musicplayer.Models
 
 import com.example.musicplayer.Helper.songe
 
-public class SongInfo {
+public final class SongInfo {
 
     var Title:String ?= null
     var Desc:String ?= null

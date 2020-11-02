@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/PlayAlbum"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#0e0e0f">
+
+    <TextView
+        android:id="@+id/numberTrack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:paddingStart="15dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="12dp"
+        android:text="-"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/textNameTrack"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:paddingTop="15dp"
+        android:paddingEnd="13dp"
+        android:paddingBottom="5dp"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:text="Name Track Album"
+        android:textColor="#FFFFFF"
+        android:textSize="19sp" />
+
+    <TextView
+        android:id="@+id/textTimeTrack"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0"
+        android:paddingTop="20dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="8dp"
+        android:text="03:23"
+        android:textColor="#B6B6B6"
+        android:textSize="16sp" />
+</LinearLayout>

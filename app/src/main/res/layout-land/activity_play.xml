@@ -14,12 +14,11 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+<!--    android:id="@+id/circularImageView"-->
     <com.rishabhharit.roundedimageview.RoundedImageView
-        android:id="@+id/circularImageView"
+        android:id="@+id/coverPlayActivity"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="25dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="32dp"
         android:src="@drawable/coverrrl"
@@ -31,7 +30,8 @@
         app:cornerRadius="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline8"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.428"
         app:roundedCorners="all" />
@@ -69,7 +69,7 @@
             android:text="Artist"
             android:textAlignment="viewStart"
             android:textColor="#DDDDDD"
-            android:textSize="16sp"
+            android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@+id/seekBar"
             app:layout_constraintEnd_toStartOf="@+id/imageHeart"
             app:layout_constraintStart_toStartOf="@+id/seekBar"
@@ -89,7 +89,7 @@
             android:text="Title"
             android:textAlignment="viewStart"
             android:textColor="#FFFFFF"
-            android:textSize="21sp"
+            android:textSize="19sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/textViewArtist2"
             app:layout_constraintEnd_toStartOf="@+id/imageHeart"
@@ -225,4 +225,18 @@
             app:srcCompat="@drawable/playlist" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.030746706" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

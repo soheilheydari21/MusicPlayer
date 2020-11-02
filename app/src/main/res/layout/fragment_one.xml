@@ -8,14 +8,13 @@
     tools:context=".Controllers.FragmentTracks"
     android:id="@+id/listLayout">
 
-    <ListView
-        android:id="@+id/listVewSong"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecyclerViewTrack"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:divider="@null">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    </ListView>
+    </androidx.recyclerview.widget.RecyclerView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/navarLayout"
@@ -24,7 +23,7 @@
         android:background="#00FBFAFA"
         android:backgroundTint="#00FFFFFF"
         android:foregroundTint="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/listVewSong"
+        app:layout_constraintBottom_toBottomOf="@+id/RecyclerViewTrack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 

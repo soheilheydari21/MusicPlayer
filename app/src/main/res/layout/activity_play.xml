@@ -37,33 +37,13 @@
         android:id="@+id/imageSpeaker"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="17dp"
         android:layout_marginEnd="33dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/speaker" />
-
-    <com.rishabhharit.roundedimageview.RoundedImageView
-        android:id="@+id/coverPlayActivity"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="30dp"
-        android:src="@drawable/coverrrl"
-        app:civ_border_color="#00d6b3"
-        app:civ_border_width="3dp"
-        app:civ_shadow="true"
-        app:civ_shadow_color="#70706D"
-        app:civ_shadow_radius="7dp"
-        app:cornerRadius="40dp"
-        app:layout_constraintDimensionRatio="h,1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageSpeaker"
-        app:roundedCorners="all" />
 
     <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
     <!--        android:layout_width="409dp"-->
@@ -74,9 +54,29 @@
 
     <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
+    <com.rishabhharit.roundedimageview.RoundedImageView
+        android:id="@+id/coverPlayActivity"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:src="@drawable/coverrrl"
+        app:civ_border_color="#00d6b3"
+        app:civ_border_width="3dp"
+        app:civ_shadow="true"
+        app:civ_shadow_color="#70706D"
+        app:civ_shadow_radius="7dp"
+        app:cornerRadius="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3"
+        app:roundedCorners="all" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="220dp"
         android:background="@drawable/background_play"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -112,7 +112,7 @@
         android:text="Artist"
         android:textAlignment="viewStart"
         android:textColor="#DDDDDD"
-        android:textSize="16sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/seekBar"
         app:layout_constraintEnd_toStartOf="@+id/imageHeart"
         app:layout_constraintStart_toStartOf="@+id/seekBar"
@@ -134,7 +134,7 @@
         android:text="Title"
         android:textAlignment="viewStart"
         android:textColor="#FFFFFF"
-        android:textSize="21sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textViewArtist2"
         app:layout_constraintEnd_toStartOf="@+id/imageHeart"
@@ -248,6 +248,20 @@
         app:layout_constraintStart_toStartOf="@+id/randomButton"
         app:layout_constraintTop_toTopOf="@+id/imageView4"
         app:srcCompat="@drawable/playlist" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.09" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.62" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

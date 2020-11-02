@@ -5,91 +5,95 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
-    tools:context=".Less.AlbumActivity">
+    tools:context=".Less.FolderActivity">
 
     <com.rishabhharit.roundedimageview.RoundedImageView
-        android:id="@+id/imageViewCoverAlbum"
+        android:id="@+id/imageViewCoverFolder"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginEnd="9dp"
-        android:layout_marginBottom="5dp"
-        android:scaleType="fitXY"
+        android:layout_marginStart="10dp"
         app:cornerRadius="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline4"
-        app:layout_constraintDimensionRatio="h,1:1"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintBottom_toTopOf="@+id/guideline10"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:roundedCorners="all"
-        app:srcCompat="@drawable/coverrrl" />
+        app:srcCompat="@drawable/folder_icon" />
 
     <TextView
-        android:id="@+id/textAlbumName"
+        android:id="@+id/textFolderName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:ellipsize="marquee"
         android:marqueeRepeatLimit="marquee_forever"
         android:singleLine="true"
-        android:text="Album name"
-        android:textAlignment="center"
+        android:text="Folder name"
+        android:textAlignment="viewStart"
         android:textColor="#FFFFFF"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toTopOf="@+id/textArtistAlbum"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textAddressFolder"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline5" />
+        app:layout_constraintStart_toStartOf="@+id/guideline2" />
 
     <TextView
-        android:id="@+id/textArtistAlbum"
+        android:id="@+id/textAddressFolder"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="18dp"
         android:ellipsize="marquee"
         android:marqueeRepeatLimit="marquee_forever"
         android:singleLine="true"
-        android:text="Artist name"
-        android:textAlignment="center"
+        android:text="Address Folder"
+        android:textAlignment="viewStart"
         android:textColor="#A3A3A3"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline10"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline5" />
+        app:layout_constraintStart_toStartOf="@+id/guideline2" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
+        android:id="@+id/linearLayoutFolder"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/background_play"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4">
+        app:layout_constraintTop_toTopOf="@+id/guideline">
 
-        <ListView
-            android:id="@+id/listViewAlbum"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listMusicFolder"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="#5C5B5B"
-            android:dividerHeight="1dp" />
+            android:layout_weight="1"
+            android:divider="@null"/>
+
     </LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
+        android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.33" />
+        app:layout_constraintGuide_percent="0.15" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
+        android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.23" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.13" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

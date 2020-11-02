@@ -13,7 +13,7 @@ import com.example.musicplayer.Models.AlbumInfo
 import com.example.musicplayer.R
 
 
-var adaptere: MySongAdapter?= null
+var adaptere: MyAllbumAdapter?= null
 var changTextAlbum = "Title"
 var changTextArtistAlbum = "Artist"
 
@@ -43,7 +43,7 @@ class MyAllbumAdapter(
     }
 
     override fun onBindViewHolder(holder: MyAllbumAdapter.AlbumHolder, position: Int) {
-        return holder?.bindAlbum(albums[position], context, position)
+        return holder.bindAlbum(albums[position], context, position)
     }
 
     inner class AlbumHolder(itemView: View?, val itemClicked: (AlbumInfo) -> Unit) : RecyclerView.ViewHolder(itemView!!)

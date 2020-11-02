@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorBlack"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:id="@+id/FolderMusic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/row_background"
+        android:orientation="horizontal"
+        android:paddingLeft="4dp">
+
+
+        <com.rishabhharit.roundedimageview.RoundedImageView
+            android:id="@+id/coverFolder"
+            android:layout_width="44dp"
+            android:layout_height="52dp"
+            android:scaleType="centerInside"
+            app:cornerRadius="15dp"
+            app:roundedCorners="all"
+            app:srcCompat="@drawable/folder_icon" />
+
+
+        <LinearLayout
+            android:id="@+id/LinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:color="@color/colorPrimary"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/folderName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:paddingLeft="5dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="5dp"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="Folder Name"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWaith"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/folderAddres"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:ellipsize="marquee"
+                android:fontFamily="sans-serif"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:paddingLeft="5dp"
+                android:paddingTop="1dp"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="Folder Addres"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTosikam"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

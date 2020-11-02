@@ -7,18 +7,10 @@
     android:orientation="vertical"
     tools:context=".Controllers.FragmentFolders">
 
-    <TextView
-        android:id="@+id/textViewComingSoon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Coming Soon"
-        android:textColor="#B6B0B0"
-        android:textSize="24sp" />
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ReciycleViewFolders"
+        android:id="@+id/ReciycleViewFolder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:scrollbarDefaultDelayBeforeFade="400" />
 
 </FrameLayout>

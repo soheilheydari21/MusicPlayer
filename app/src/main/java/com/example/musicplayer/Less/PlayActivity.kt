@@ -23,6 +23,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.get
 import com.bumptech.glide.Glide
 import com.example.musicplayer.Helper.*
+import com.example.musicplayer.Helper.MyTrackAdapter.Companion.myListSong
 //import com.example.musicplayer.Activity.PlayActivity.seecbar.*
 import com.example.musicplayer.R
 import com.example.musicplayer.Models.SongInfo
@@ -60,17 +61,14 @@ class PlayActivity : AppCompatActivity() {
 //        textViewTitle2.isSelected =true
 //        textViewArtist2.isSelected =true
 
-        if(listOfSongs != null)
-        {
-//             uri = Uri.parse(listVewSong.get(position).getpath())
-        }
+//        uri = Uri.parse(listOfSongs[position].getpach())
 
         totalTime = mediaPlayer!!.duration
 
         //  Notification 2
         CreatNotificationChannel()
         val notificationLayout = RemoteViews(packageName,R.layout.notification)
-        var builder = NotificationCompat.Builder(this,CHANNEL_ID)
+        val builder = NotificationCompat.Builder(this,CHANNEL_ID)
             .setContentTitle("Your Title")
             .setSmallIcon(R.drawable.ic_baseline_music_note_24)
             .setStyle(NotificationCompat.DecoratedCustomViewStyle())
@@ -82,7 +80,7 @@ class PlayActivity : AppCompatActivity() {
         textViewArtist2.text = changTextArtist
 
         // SeekBar
-        var mySongAdapter = mySongThread()
+        var TestAdapter = mySongThread()
         mySongThread().start()
 
         //  Notification 3
@@ -131,7 +129,7 @@ class PlayActivity : AppCompatActivity() {
         Thread(Runnable {
             while (mediaPlayer!= null){
                 try {
-                    var msg = Message()
+                    val msg = Message()
                     msg.what = mediaPlayer!!.currentPosition
                     handler.sendMessage(msg)
                     Thread.sleep(1000)
@@ -199,12 +197,12 @@ class PlayActivity : AppCompatActivity() {
             else if (isShuffle)
             {
                 val rand:Random = Random
-                currentSongIndex = rand.nextInt((MySongAdapter.myListSong.size - 1))
+                currentSongIndex = rand.nextInt((myListSong.size - 1))
                 playSong(currentSongIndex)
             }
             else
             {
-                if (currentSongIndex<(MySongAdapter.myListSong.size - 1))
+                if (currentSongIndex<(myListSong.size - 1))
                 {
                     playSong(currentSongIndex + 1)
                     currentSongIndex += 1
@@ -243,7 +241,7 @@ class PlayActivity : AppCompatActivity() {
 
         // btn Speaker
         imageSpeaker.setOnClickListener {
-                val audioManager: AudioManager =getSystemService(Context.AUDIO_SERVICE) as AudioManager
+                val audioManager: AudioManager =getSystemService(AUDIO_SERVICE) as AudioManager
                 val maxVolume = audioManager.mediaMaxVolume
                 val randomIndex = Random.nextInt(((maxVolume - 0) + 1) + 0)
 
@@ -346,7 +344,7 @@ class PlayActivity : AppCompatActivity() {
         val art:ByteArray? = retriever.embeddedPicture
         if(art != null)
         {
-            MySongAdapter.setCover?.let {
+            MyTrackAdapter.setCover?.let {
                 Glide.with(this)
                     .asBitmap()
                     .load(art)
@@ -355,7 +353,7 @@ class PlayActivity : AppCompatActivity() {
         }
         else
         {
-            MySongAdapter.setCover?.let {
+            MyTrackAdapter.setCover?.let {
                 Glide.with(this)
                     .asBitmap()
                     .load(R.drawable.coverrrl)

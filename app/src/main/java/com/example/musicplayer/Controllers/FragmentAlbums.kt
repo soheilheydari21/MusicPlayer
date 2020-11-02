@@ -29,7 +29,7 @@ class FragmentAlbums : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_two, container, false)
 
-        RecycleAlbum = view.findViewById(R.id.ReciycleViewAllbum)
+        RecycleAlbum = view.findViewById(R.id.ReciycleViewAlbum)
 
         RecycleAlbum.apply {
             setHasFixedSize(true)
@@ -68,7 +68,7 @@ class FragmentAlbums : Fragment() {
             }
             cursor.close()
 
-            val songList = view.findViewById<RecyclerView>(R.id.ReciycleViewAllbum)
+            val songList = view.findViewById<RecyclerView>(R.id.ReciycleViewAlbum)
             songList.adapter = MyAllbumAdapter(
                 activity!!.applicationContext,
                 listofsongs

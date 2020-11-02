@@ -1,23 +1,27 @@
 package com.example.musicplayer.Less
 
+//import com.example.musicplayer.Helper.MyTrackAdapter
+import android.app.SearchManager
+import android.content.Context
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.widget.*
+import android.view.MenuItem
+import android.widget.SearchView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.musicplayer.Controllers.FragmentTracks
 import com.example.musicplayer.Helper.MyPagerAdapter
-import com.example.musicplayer.Helper.MySongAdapter
-import com.example.musicplayer.R
+import com.example.musicplayer.Helper.MyTrackAdapter
 import com.example.musicplayer.Models.SongInfo
+import com.example.musicplayer.R
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_one.*
 
 open class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
-    var adapter: MySongAdapter? = null
+    var adapter: MyTrackAdapter? = null
     var listofsongs = ArrayList<SongInfo>()
     companion object{
         const val PERMISSION_REQUEST_CODE = 12
@@ -28,11 +32,17 @@ open class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         setContentView(R.layout.activity_main)
 
         // Request allo
-        if (ContextCompat.checkSelfPermission(applicationContext, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+        if (ContextCompat.checkSelfPermission(
+                applicationContext,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE
+            )
             != PackageManager.PERMISSION_GRANTED)
             ActivityCompat.requestPermissions(
                 this,
-                arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                arrayOf(
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ),
                 MainActivity.PERMISSION_REQUEST_CODE
             )
         else
@@ -107,11 +117,15 @@ open class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     override fun onCreateOptionsMenu(menu: Menu?):Boolean{
 
         menuInflater.inflate(R.menu.main_menu, menu)
-        val search = menu!!.findItem(R.id.appBarSearch)
-        val searchView = search!!.actionView as SearchView
-        searchView.queryHint="Search something!"
+        val menuItem = menu!!.findItem(R.id.appBarSearch)
+        val searchView = menuItem.actionView as SearchView
+        searchView.setOnQueryTextListener(this)
+        searchView.queryHint= """Search something!"""
 
-        FragmentTracks.musicAdapter?.updateList(MySongAdapter.myListSong)
+//        val searchView = menu!!.findItem(R.id.appBarSearch).actionView as SearchView
+//        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+//        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -119,18 +133,19 @@ open class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         return false
     }
 
-    override fun onQueryTextChange(newText:String):Boolean{
+    override fun onQueryTextChange(newText: String):Boolean{
 
         val userInput:String = newText.toLowerCase()
-        val myFiles = ArrayList<SongInfo>()
-        for (song in myFiles)
+        val myFiles: ArrayList<SongInfo> = ArrayList()
+        for (song:SongInfo in listofsongs)
         {
             if(song.Title!!.toLowerCase().contains(userInput))
             {
                 myFiles.add(song)
             }
         }
-        FragmentTracks.musicAdapter?.updateList(MySongAdapter.myListSong)
+        FragmentTracks.musicAdapter?.updateList(myFiles)
+        loadData()
         return true
     }
 

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/colorBlack"
     android:padding="5dp">
 
@@ -19,8 +19,8 @@
 
         <com.rishabhharit.roundedimageview.RoundedImageView
             android:id="@+id/coverMusic"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:scaleType="fitXY"
             app:cornerRadius="15dp"
             app:roundedCorners="all"
@@ -42,7 +42,7 @@
                 android:layout_marginRight="15dp"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
-                android:paddingLeft="15dp"
+                android:paddingLeft="12dp"
                 android:paddingTop="8dp"
                 android:paddingEnd="5dp"
                 android:scrollHorizontally="true"
@@ -63,7 +63,7 @@
                 android:ellipsize="marquee"
                 android:fontFamily="sans-serif"
                 android:marqueeRepeatLimit="marquee_forever"
-                android:paddingLeft="15dp"
+                android:paddingLeft="12dp"
                 android:paddingTop="1dp"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
@@ -71,7 +71,7 @@
                 android:textAlignment="viewStart"
                 android:textAllCaps="false"
                 android:textColor="@color/colorTosikam"
-                android:textSize="15sp"
+                android:textSize="14sp"
                 tools:text="Mohammad Reza Golzar" />
 
         </LinearLayout>

@@ -8,16 +8,20 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.musicplayer.*
 import com.example.musicplayer.Less.PlayActivity
 import com.example.musicplayer.Helper.*
 import com.example.musicplayer.Models.SongInfo
 import com.example.musicplayer.Services.DataServis.Companion.playSong
-import com.rishabhharit.roundedimageview.RoundedImageView
 //import com.example.musicplayer.Servis.DataServis.pause
 import kotlin.collections.ArrayList
 
 class FragmentTracks : Fragment() {
+
+    lateinit var RecycleTrack:RecyclerView
+    lateinit var adapter : MyAllbumAdapter
 
     companion object{
         var TitleN:TextView? = null
@@ -25,17 +29,23 @@ class FragmentTracks : Fragment() {
         var PlayN:ImageView? = null
         var NextN:ImageView? = null
         var PreviewN:ImageView? = null
-        var musicAdapter:MySongAdapter? = null
+        var musicAdapter:MyTrackAdapter? = null
         var Cover:ImageView? = null
     }
 
-    @SuppressLint("WrongViewCast", "Recycle")
+    @SuppressLint("WrongViewCast", "Recycle", "CutPasteId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_one, container, false)
+        RecycleTrack = view.findViewById(R.id.RecyclerViewTrack)
+
+        RecycleTrack.apply {
+            setHasFixedSize(true)
+            layoutManager = GridLayoutManager(activity,1)
+        }
 
         TitleN = view.findViewById(R.id.textViewTitleN)
         ArtistN = view.findViewById(R.id.textViewArtistN)
@@ -51,11 +61,10 @@ class FragmentTracks : Fragment() {
         FragmentTracks.ArtistN?.isSelected =true
 
         val allsong = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
-        val selection = MediaStore.Audio.Media.IS_MUSIC + "!= 0"
+//        val selection = MediaStore.Audio.Media.IS_MUSIC+ "!= 0"
         val sortOrder = MediaStore.Audio.Media.TITLE + " ASC"
-        val cursor = activity!!.contentResolver.query(allsong,null,selection,null,sortOrder)
-        var listofsongs = ArrayList<SongInfo>()
-
+        val cursor = activity!!.contentResolver.query(allsong,null,null,null,sortOrder)
+        val listofsongs = ArrayList<SongInfo>()
 
         if (cursor != null)
         {
@@ -66,7 +75,7 @@ class FragmentTracks : Fragment() {
                     val songURL = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA))
                     val songAuthor = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST))
                     val songName = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME))
-                    val cover = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM))
+                    val cover = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TRACK))
 
                     listofsongs.add(
                         SongInfo(
@@ -81,11 +90,13 @@ class FragmentTracks : Fragment() {
             }
             cursor.close()
 
-            val songList = view.findViewById<ListView>(R.id.listVewSong)
-            songList.adapter = MySongAdapter(
+            val songList = view.findViewById<RecyclerView>(R.id.RecyclerViewTrack)
+            songList.adapter = MyTrackAdapter(
                 activity!!.applicationContext,
                 listofsongs
-            )
+            ){
+
+            }
 
             //navar Control music playbtn
             FragmentTracks.PlayN?.setOnClickListener {
@@ -110,8 +121,8 @@ class FragmentTracks : Fragment() {
 
                 }else
                 {
-                    playSong(MySongAdapter.myListSong.size -1)
-                    currentSongIndex = MySongAdapter.myListSong.size -1
+                    playSong(MyTrackAdapter.myListSong.size -1)
+                    currentSongIndex = MyTrackAdapter.myListSong.size -1
                 }
             }
 

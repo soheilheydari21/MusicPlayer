@@ -10,7 +10,7 @@
     android:animateLayoutChanges="true">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ReciycleViewAllbum"
+        android:id="@+id/ReciycleViewAlbum"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbarDefaultDelayBeforeFade="400" />
