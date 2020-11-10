@@ -12,16 +12,18 @@ import com.bumptech.glide.Glide
 import com.example.musicplayer.Models.AlbumInfo
 import com.example.musicplayer.R
 
+//ToDo this fixes   Album adapter
 
-var adaptere: MyAllbumAdapter?= null
+var adaptere: MyAlbumAdapter?= null
 var changTextAlbum = "Title"
 var changTextArtistAlbum = "Artist"
+var changeCoverAlbum: ByteArray? = null
 
-class MyAllbumAdapter(
+class MyAlbumAdapter(
     val context: Context,
     private val albums: ArrayList<AlbumInfo>,
     private val itemClicked: (AlbumInfo) -> Unit
-) : RecyclerView.Adapter<MyAllbumAdapter.AlbumHolder>() {
+) : RecyclerView.Adapter<MyAlbumAdapter.AlbumHolder>() {
 
     companion object{
         var myAlbumSong = ArrayList<AlbumInfo>()
@@ -29,7 +31,7 @@ class MyAllbumAdapter(
 
     private val mContext: Context
     init {
-        MyAllbumAdapter.myAlbumSong = albums
+        MyAlbumAdapter.myAlbumSong = albums
         mContext = context
     }
 
@@ -42,7 +44,7 @@ class MyAllbumAdapter(
         return albums.size
     }
 
-    override fun onBindViewHolder(holder: MyAllbumAdapter.AlbumHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyAlbumAdapter.AlbumHolder, position: Int) {
         return holder.bindAlbum(albums[position], context, position)
     }
 
@@ -80,7 +82,6 @@ class MyAllbumAdapter(
             }
 
             //cover2
-            val imageTwo = albums[position].getpach()?.let { getAlbumArt(it) }
             if(image != null)
             {
                 setAlbumTwo?.let {
@@ -98,7 +99,6 @@ class MyAllbumAdapter(
             }
 
             //cover3
-            val imageThree = albums[position].getpach()?.let { getAlbumArt(it) }
             if(image != null)
             {
                 setAlbumThree?.let {
@@ -118,6 +118,7 @@ class MyAllbumAdapter(
             itemView.setOnClickListener { itemClicked(albuminfo)
                 changTextAlbum = albumTitle?.text.toString()
                 changTextArtistAlbum = albumArtist?.text.toString()
+                changeCoverAlbum = image
             }
         }
 

@@ -7,6 +7,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.media.AudioManager
 import android.media.MediaMetadataRetriever
 import android.net.Uri
@@ -17,22 +18,29 @@ import android.os.Handler
 import android.os.Message
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.view.get
 import com.bumptech.glide.Glide
+import com.example.musicplayer.Controllers.FragmentTracks
 import com.example.musicplayer.Helper.*
 import com.example.musicplayer.Helper.MyTrackAdapter.Companion.myListSong
 //import com.example.musicplayer.Activity.PlayActivity.seecbar.*
 import com.example.musicplayer.R
 import com.example.musicplayer.Models.SongInfo
-import com.example.musicplayer.Services.DataServis.Companion.playSong
+import com.example.musicplayer.Services.DataService.Companion.playSong
+import com.getkeepsafe.taptargetview.TapTarget
+import com.getkeepsafe.taptargetview.TapTargetView
+import eightbitlab.com.blurview.BlurView
+import eightbitlab.com.blurview.RenderScriptBlur
+//import com.jackandphantom.blurimage.BlurImage
 //import com.example.musicplayer.Activity.PlayActivity.seecbar.mySongThread
 import kotlinx.android.synthetic.main.activity_play.*
-import kotlinx.android.synthetic.main.fragment_one.*
+import kotlinx.android.synthetic.main.music_album_item.*
 import kotlin.random.Random
 
+var totalTime: Int = 0
 
 //@ExperimentalTime
 class PlayActivity : AppCompatActivity() {
@@ -46,22 +54,26 @@ class PlayActivity : AppCompatActivity() {
     }
 
     //  Notification
-    var listOfSongs = ArrayList<SongInfo>()
+    var listSongs = ArrayList<SongInfo>()
     private var CHANNEL_ID = "Your_Channel_ID"
-    private var totalTime: Int = 0
 
+
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_play)
 
+//        getIntentMethod()
+
+        blurBackground()
+
+        setCoverPlayActivity()
+
+        setCoverBlue()
+
         seekbar = findViewById(R.id.seekBar)
         Pause = findViewById(R.id.imagePause)
         TitlePlay = findViewById(R.id.textViewTitle2)
-
-//        textViewTitle2.isSelected =true
-//        textViewArtist2.isSelected =true
-
-//        uri = Uri.parse(listOfSongs[position].getpach())
 
         totalTime = mediaPlayer!!.duration
 
@@ -91,15 +103,28 @@ class PlayActivity : AppCompatActivity() {
             }
         }
 
+
+        //ToDo  More => create list
+        imageCreate.setOnClickListener {
+            TapTargetView.showFor(this, TapTarget.forView(findViewById(R.id.imageCreate),
+                "Not Active", "it can be used in later Updates")
+                .tintTarget(true)
+                .outerCircleColor(R.color.colorTheme))
+        }
+
+        //ToDo  add Favourite tab
         var isLike = true
         imageHeart.setOnClickListener {
             if (isLike) {
-                imageHeart.setImageResource(R.drawable.heart1);
-                isLike = false;
+                imageHeart.setImageResource(R.drawable.heart1)
+                isLike = false
                 Toast.makeText(this," Add song to Favourite list ",Toast.LENGTH_SHORT).show()
+                animationHeart()
+
             }else if (!isLike){
                 imageHeart.setImageResource(R.drawable.heart)
-                isLike = true;
+                isLike = true
+                animationHeart()
             }
         }
 
@@ -145,17 +170,19 @@ class PlayActivity : AppCompatActivity() {
         //btn pause
         imagePause.setOnClickListener {
             if (mediaPlayer!!.isPlaying) {
-                imagePause.setImageResource(R.drawable.play);
+                imagePause.setImageResource(R.drawable.play)
                 mediaPlayer!!.pause()
+                animationPause()
 
             }else {
-                imagePause.setImageResource(R.drawable.pause);
+                imagePause.setImageResource(R.drawable.pause)
                 mediaPlayer!!.start()
+                animationPause()
 
             }
         }
 
-        //ToDo this fixes   btnShuffle
+        //ToDo  btnShuffle
         //btn Shuffle
         var isRepeat = false
         var isShuffle = false
@@ -173,22 +200,24 @@ class PlayActivity : AppCompatActivity() {
             }
         }
 
-        //ToDo this fixes    btnRepeat
+        //ToDo  btnRepeat
         //btn Repeat
         imageTekrar.setOnClickListener {
             if (isRepeat) {
-                imageTekrar.setImageResource(R.drawable.refresh);
-                isRepeat = false;
+                imageTekrar.setImageResource(R.drawable.refresh)
+                isRepeat = false
+                animationRepeat()
 
             }else{
-                imageTekrar.setImageResource(R.drawable.refresh1);
-                isRepeat = true;
-                randomButton.setImageResource(R.drawable.random);
-                isShuffle = false;
+                imageTekrar.setImageResource(R.drawable.refresh1)
+                isRepeat = true
+                randomButton.setImageResource(R.drawable.random)
+                isShuffle = false
+                animationRepeat()
             }
         }
 
-        //ToDo this fixes    mediaPlayer
+        //ToDo this fixes   mediaPlayer => isRepeat & isShuffle
         mediaPlayer!!.setOnCompletionListener {
             if (isRepeat)
             {
@@ -230,6 +259,7 @@ class PlayActivity : AppCompatActivity() {
 
         //btn backward
         var backwardTime: Int = 5000
+
         btnBackward.setOnClickListener {
             currentPosition = mediaPlayer!!.currentPosition
             if(mediaPlayer!!.isPlaying && currentPosition > 5000)
@@ -244,16 +274,16 @@ class PlayActivity : AppCompatActivity() {
                 val audioManager: AudioManager =getSystemService(AUDIO_SERVICE) as AudioManager
                 val maxVolume = audioManager.mediaMaxVolume
                 val randomIndex = Random.nextInt(((maxVolume - 0) + 1) + 0)
-
                 audioManager.setMediaVolume(randomIndex)
-//                toast("Max: $maxVolume / Current: ${audioManager.mediaCurrentVolume}")
+
         }
 
+        //btn list
         baseline.setOnClickListener {
-            val listIntent = Intent(this@PlayActivity, MainActivity::class.java)
-            startActivity(listIntent)
+            onBackPressed()
         }
     }
+
 
     // volume
     private fun AudioManager.setMediaVolume(volumeIndex:Int) {
@@ -283,13 +313,14 @@ class PlayActivity : AppCompatActivity() {
 
             val remaningTime = createTimeLable(totalTime - currentPosition)
             totalTimer.text = "-$remaningTime"
+
         }
     }
 
     fun createTimeLable(time: Int): String {
         var timeLable = ""
-        var min = time / 1000 / 60
-        var sec = time / 1000 % 60
+        val min = time / 1000 / 60
+        val sec = time / 1000 % 60
 
         timeLable = "$min:"
         if (sec < 10) timeLable += "0"
@@ -336,31 +367,111 @@ class PlayActivity : AppCompatActivity() {
         }
     }
 
-
-    public fun metaData(uri:Uri)
+    fun setCoverPlayActivity()
     {
-        val retriever = MediaMetadataRetriever()
-        retriever.setDataSource(uri.toString())
-        val art:ByteArray? = retriever.embeddedPicture
-        if(art != null)
-        {
-            MyTrackAdapter.setCover?.let {
-                Glide.with(this)
-                    .asBitmap()
-                    .load(art)
-                    .into(it)
-            }
+        if (changeCover != null) {
+            Glide.with(this).asBitmap()
+                .load(changeCover)
+                .into(coverPlayActivity)
         }
         else
         {
-            MyTrackAdapter.setCover?.let {
-                Glide.with(this)
-                    .asBitmap()
-                    .load(R.drawable.coverrrl)
-                    .into(it)
-            }
+            Glide.with(this)
+                .load(R.drawable.coverrrl)
+                .into(coverPlayActivity)
         }
     }
+
+    fun setCoverBlue()
+    {
+        if (changeCover != null) {
+            Glide.with(this).asBitmap()
+                .load(changeCover)
+                .into(imageblur)
+        }
+        else
+        {
+            Glide.with(this)
+                .load(R.drawable.matt)
+                .into(imageblur)
+        }
+    }
+
+    private fun blurBackground()
+    {
+        val radius:Float = 22f
+
+        val decorView = window.decorView
+
+        val rootView:ViewGroup = decorView.findViewById(android.R.id.content)
+
+        val windowBackground = decorView.background
+
+        blurView.setupWith(rootView)
+            .setFrameClearDrawable(windowBackground)
+            .setBlurAlgorithm( RenderScriptBlur(this))
+            .setBlurRadius(radius)
+            .setBlurAutoUpdate(true)
+            .setHasFixedTransformationMatrix(true)
+    }
+
+    //animation
+    private fun animationPause()
+    {
+        val animPause = AnimationUtils.loadAnimation(this, R.anim.anim_pause)
+        imagePause.startAnimation(animPause)
+    }
+
+    private fun animationHeart()
+    {
+        val animHeart = AnimationUtils.loadAnimation(this, R.anim.anim_pause)
+        imageHeart.startAnimation(animHeart)
+    }
+
+    private fun animationRepeat()
+    {
+        val animRepeat = AnimationUtils.loadAnimation(this, R.anim.anim_repeat)
+        imageTekrar.startAnimation(animRepeat)
+    }
+
+
+
+//    private fun getIntentMethod()
+//    {
+//        position = intent.getIntExtra("position", -1)
+//        listSongs = listofsongs
+////        uri = Uri.parse(listSongs[position].getpach())
+//
+//        uri?.let { metaData(it) }
+//    }
+
+
+//    private fun metaData(uri:Uri)
+//    {
+//        val retriever = MediaMetadataRetriever()
+//        retriever.setDataSource(uri.toString())
+//        val art:ByteArray? = retriever.embeddedPicture
+//        if(art != null)
+//        {
+//            setCoverPlayActivity?.let {
+//                Glide.with(this)
+//                    .asBitmap()
+//                    .load(art)
+//                    .into(it)
+//            }
+//        }
+//        else
+//        {
+//            setCoverPlayActivity?.let {
+//                Glide.with(this)
+//                    .asBitmap()
+//                    .load(R.drawable.coverrrl)
+//                    .into(it)
+//            }
+//        }
+//    }
+
+
 
 
 }

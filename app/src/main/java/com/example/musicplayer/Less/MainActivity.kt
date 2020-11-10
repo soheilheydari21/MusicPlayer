@@ -7,6 +7,8 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,12 +19,18 @@ import com.example.musicplayer.Helper.MyPagerAdapter
 import com.example.musicplayer.Helper.MyTrackAdapter
 import com.example.musicplayer.Models.SongInfo
 import com.example.musicplayer.R
+import com.getkeepsafe.taptargetview.TapTarget
+import com.getkeepsafe.taptargetview.TapTargetView
+import eightbitlab.com.blurview.RenderScriptBlur
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_play.*
+
+var listofsongs = ArrayList<SongInfo>()
 
 open class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     var adapter: MyTrackAdapter? = null
-    var listofsongs = ArrayList<SongInfo>()
+
     companion object{
         const val PERMISSION_REQUEST_CODE = 12
     }
@@ -30,6 +38,7 @@ open class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         // Request allo
         if (ContextCompat.checkSelfPermission(
@@ -43,22 +52,12 @@ open class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                     android.Manifest.permission.READ_EXTERNAL_STORAGE,
                     android.Manifest.permission.WRITE_EXTERNAL_STORAGE
                 ),
-                MainActivity.PERMISSION_REQUEST_CODE
+                PERMISSION_REQUEST_CODE
             )
         else
         {
             loadData()
         }
-
-        // Search
-//        LoadData("%")
-
-//        var dbManager = DBManager(this)
-//        var values = ContentValues()
-//        values.put("Title", findViewById<TextView>(R.id.textViewTitle).text.toString())
-//        values.put("Artist", findViewById<TextView>(R.id.textViewArtist).text.toString())
-
-//        val ID = dbManager.Insert(values)
 
     }
 
@@ -70,32 +69,7 @@ open class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         tabLayout.setupWithViewPager(viewPager)
 
         tabLayout.getTabAt(3)!!.setIcon(R.drawable.ic_baseline_favorite_24)
-
     }
-
-    //ToDo: fix this    Search
-     //  source search
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.main_menu,menu)
-//
-//        val searchView = menu!!.findItem(R.id.appBarSearch).actionView as SearchView
-//        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-//
-//        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
-//        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener
-//        {
-//            override fun onQueryTextChange(newText: String?): Boolean {
-//                LoadData("%" + newText + "%")
-//                return false
-//            }
-//
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-//                return false
-//            }
-//        })
-//        return super.onCreateOptionsMenu(menu)
-//
-//    }
 
     //  Requested allo 2
     override fun onRequestPermissionsResult(
@@ -103,16 +77,20 @@ open class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        if (requestCode == MainActivity.PERMISSION_REQUEST_CODE){
+        if (requestCode == PERMISSION_REQUEST_CODE){
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 Toast.makeText(applicationContext, "Permission Granted", Toast.LENGTH_SHORT).show()
                 loadData()
+                TapTargetView.showFor(this, TapTarget.forView(findViewById(R.id.appBarSearch),
+                    "Search bar", "it can be used in later Updates")
+                    .tintTarget(true)
+                    .outerCircleColor(R.color.colorRed))
             }
         }
     }
 
 
-//ToDo Search NEW2
+//ToDo this fixes   Search 1
 //SEARCH
     override fun onCreateOptionsMenu(menu: Menu?):Boolean{
 
@@ -122,14 +100,11 @@ open class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         searchView.setOnQueryTextListener(this)
         searchView.queryHint= """Search something!"""
 
-//        val searchView = menu!!.findItem(R.id.appBarSearch).actionView as SearchView
-//        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-//        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
-
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
+
         return false
     }
 
@@ -137,17 +112,15 @@ open class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
         val userInput:String = newText.toLowerCase()
         val myFiles: ArrayList<SongInfo> = ArrayList()
+
         for (song:SongInfo in listofsongs)
-        {
             if(song.Title!!.toLowerCase().contains(userInput))
-            {
                 myFiles.add(song)
-            }
-        }
+
         FragmentTracks.musicAdapter?.updateList(myFiles)
-        loadData()
         return true
     }
+
 
 }
 

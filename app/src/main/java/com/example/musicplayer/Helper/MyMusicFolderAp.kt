@@ -17,10 +17,11 @@ import com.example.musicplayer.Controllers.FragmentTracks
 import com.example.musicplayer.Models.SongInfo
 import com.example.musicplayer.R
 
+//ToDo this fixes  Music folder adapter
+
 class MyMusicFolderAp(
     val context: Context,
-    myListSong: ArrayList<SongInfo>,
-    private val itemClicked: (SongInfo) -> Unit
+    myListSong: ArrayList<SongInfo>
 ) : RecyclerView.Adapter<MyMusicFolderAp.SongHolder>() {
 
     companion object {
@@ -41,12 +42,7 @@ class MyMusicFolderAp(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongHolder {
         view = LayoutInflater.from(context).inflate(R.layout.track_item, parent, false)
 
-        var setCover = view?.findViewById<ImageView>(R.id.coverMusic)
-        var songTitle = view?.findViewById<TextView>(R.id.textViewTitle)
-        var songArtist = view?.findViewById<TextView>(R.id.textViewDesc)
-        var itemMusic = view?.findViewById<LinearLayout>(R.id.PlayMusic)
-
-        return SongHolder(view, itemClicked)
+        return SongHolder(view)
     }
 
     override fun getItemCount(): Int {
@@ -57,7 +53,7 @@ class MyMusicFolderAp(
         return holder.bindMusic(myListSong[position], context, position)
     }
 
-    inner class SongHolder(itemView: View?, val itemClicked: (SongInfo) -> Unit) : RecyclerView.ViewHolder(itemView!!)
+    inner class SongHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!)
     {
         private var setCover = itemView?.findViewById<ImageView>(R.id.coverMusic)
         private var songTitle = itemView?.findViewById<TextView>(R.id.textViewTitle)
@@ -89,42 +85,30 @@ class MyMusicFolderAp(
                     Glide.with(mContext)
                         .load(R.drawable.coverrrl)
                         .into(it)
-                };
+                }
             }
 
             if (mediaPlayer == null)
                 mediaPlayer = MediaPlayer()
 
-            itemView.setOnClickListener { itemClicked(songinfo)
-                var flags = true
-                if (!flags)
-                {
-                    mediaPlayer!!.stop()
-                    itemView.findViewById<TextView>(R.id.textViewDesc).setTextColor(Color.parseColor("#c3c3c3"))
-                    itemView.findViewById<TextView>(R.id.textViewTitle).setTextColor(Color.parseColor("#ffffff"))
-                    FragmentTracks.PlayN?.setImageResource(R.drawable.play_navar)
-                    flags = true
+            itemView.setOnClickListener {
 
-                }
-                else if (flags)
-                {
-                    mediaPlayer!!.reset()
-                    mediaPlayer!!.setDataSource(Songy.SongURL)
-                    mediaPlayer!!.prepare()
-                    mediaPlayer!!.start()
-                    itemView.findViewById<TextView>(R.id.textViewDesc).setTextColor(Color.parseColor("#00d6b3"))
-                    itemView.findViewById<TextView>(R.id.textViewTitle).setTextColor(Color.parseColor("#13f8d1"))
-                    itemView.findViewById<TextView>(R.id.textViewDesc).isSelected = true
-                    itemView.findViewById<TextView>(R.id.textViewTitle).isSelected = true
+                mediaPlayer!!.reset()
+                mediaPlayer!!.setDataSource(Songy.SongURL)
+                mediaPlayer!!.prepare()
+                mediaPlayer!!.start()
 
-                    changTextTitle = itemView.findViewById<TextView>(R.id.textViewTitle).text.toString()
-                    changTextArtist = itemView.findViewById<TextView>(R.id.textViewDesc).text.toString()
+                itemView.findViewById<TextView>(R.id.textViewDesc).setTextColor(Color.parseColor("#00d6b3"))
+                itemView.findViewById<TextView>(R.id.textViewTitle).setTextColor(Color.parseColor("#13f8d1"))
+                itemView.findViewById<TextView>(R.id.textViewDesc).isSelected = true
+                itemView.findViewById<TextView>(R.id.textViewTitle).isSelected = true
 
-                    FragmentTracks.TitleN?.text = changTextTitle
-                    FragmentTracks.ArtistN?.text = changTextArtist
-                    FragmentTracks.PlayN?.setImageResource(R.drawable.pause_icon_15)
-                    flags = false
-                }
+                changTextTitle = itemView.findViewById<TextView>(R.id.textViewTitle).text.toString()
+                changTextArtist = itemView.findViewById<TextView>(R.id.textViewDesc).text.toString()
+                FragmentTracks.TitleN?.text = changTextTitle
+                FragmentTracks.ArtistN?.text = changTextArtist
+                FragmentTracks.PlayN?.setImageResource(R.drawable.pause_icon_15)
+
                 songe = Songy
 
             }

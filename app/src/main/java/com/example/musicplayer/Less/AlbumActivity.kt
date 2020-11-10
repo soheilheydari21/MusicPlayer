@@ -3,16 +3,21 @@ package com.example.musicplayer.Less
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.provider.MediaStore
 import android.widget.ListView
-import com.example.musicplayer.Helper.MyMusicAlbumAd
-import com.example.musicplayer.Helper.changTextAlbum
-import com.example.musicplayer.Helper.changTextArtistAlbum
+import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.example.musicplayer.Helper.*
 import com.example.musicplayer.Models.SongInfo
 import com.example.musicplayer.R
 import kotlinx.android.synthetic.main.activity_album.*
+import kotlinx.android.synthetic.main.activity_play.*
+import kotlinx.android.synthetic.main.music_album_item.*
 
 class AlbumActivity : AppCompatActivity() {
+
 
     @SuppressLint("Recycle")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,6 +26,8 @@ class AlbumActivity : AppCompatActivity() {
 
         textAlbumName.text = changTextAlbum
         textArtistAlbum.text = changTextArtistAlbum
+
+        setCoverAlbumActivity()
 
         val allsong = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
         val selection = MediaStore.Audio.Media.IS_MUSIC + "!= 0"
@@ -62,5 +69,21 @@ class AlbumActivity : AppCompatActivity() {
         }
 
     }
+
+    fun setCoverAlbumActivity()
+    {
+        if (changeCoverAlbum != null) {
+            Glide.with(this).asBitmap()
+                .load(changeCoverAlbum)
+                .into(imageViewCoverAlbum)
+        }
+        else
+        {
+            Glide.with(this)
+                .load(R.drawable.coverrrl)
+                .into(imageViewCoverAlbum)
+        }
+    }
+
 
 }

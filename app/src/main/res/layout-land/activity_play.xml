@@ -4,15 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/matt1"
     tools:context=".Less.PlayActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ImageView
+        android:id="@+id/imageblur"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#86050505">
+        android:layout_marginEnd="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/matt"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <eightbitlab.com.blurview.BlurView
+        android:id="@+id/blurView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </eightbitlab.com.blurview.BlurView>
 
 <!--    android:id="@+id/circularImageView"-->
     <com.rishabhharit.roundedimageview.RoundedImageView
@@ -21,6 +36,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="32dp"
+        android:scaleType="fitXY"
         android:src="@drawable/coverrrl"
         app:civ_border_color="#00d6b3"
         app:civ_border_width="3dp"
@@ -146,7 +162,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/imageCreate"
             android:layout_width="27dp"
             android:layout_height="26dp"
             android:layout_marginEnd="26dp"
@@ -183,7 +199,7 @@
             android:layout_height="28dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="25dp"
-            app:layout_constraintBottom_toTopOf="@+id/imageView4"
+            app:layout_constraintBottom_toTopOf="@+id/imageCreate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btnForward"

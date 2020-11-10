@@ -11,14 +11,6 @@ tools:context=".Less.MainActivity">
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <!--        <androidx.appcompat.widget.Toolbar-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="?attr/actionBarSize"-->
-    <!--            android:id="@+id/toolbar"-->
-    <!--            android:background="?attr/colorPrimary"-->
-    <!--            app:layout_scrollFlags="scroll|enterAlways"-->
-    <!--            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
-    <!--            app:titleTextColor="#ffffff"/>-->
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
@@ -33,6 +25,7 @@ tools:context=".Less.MainActivity">
         app:tabSelectedTextColor="#03FBA4"
         app:tabTextAppearance="@style/TextAppearance.AppCompat.Medium"
         app:tabTextColor="#C5C5C5">
+
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
@@ -53,10 +46,14 @@ tools:context=".Less.MainActivity">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/ic_baseline_favorite_24" />
+
     </com.google.android.material.tabs.TabLayout>
 
 
+
 </com.google.android.material.appbar.AppBarLayout>
+
+
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
@@ -64,6 +61,7 @@ tools:context=".Less.MainActivity">
         android:layout_height="match_parent"
         android:background="#000000"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
 
     </androidx.viewpager.widget.ViewPager>
 

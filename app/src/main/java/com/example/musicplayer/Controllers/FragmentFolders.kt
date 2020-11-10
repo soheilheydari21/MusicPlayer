@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.musicplayer.Helper.MyAllbumAdapter
+import com.example.musicplayer.Helper.MyAlbumAdapter
 import com.example.musicplayer.Helper.MyFolderAdapter
 import com.example.musicplayer.Less.AlbumActivity
 import com.example.musicplayer.Less.FolderActivity
@@ -29,7 +29,7 @@ class FragmentFolders : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_three, container, false)
+        val view = inflater.inflate(R.layout.fragment_folder, container, false)
         RecycleFolder = view.findViewById(R.id.ReciycleViewFolder)
 
         RecycleFolder.apply {

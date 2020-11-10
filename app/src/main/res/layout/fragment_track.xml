@@ -27,6 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+
         <com.rishabhharit.roundedimageview.RoundedImageView
             android:id="@+id/imageView3"
             android:layout_width="wrap_content"
@@ -75,6 +76,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="10dp"
+            android:scaleType="fitXY"
             android:src="@drawable/coverrrl"
             app:cornerRadius="15dp"
             app:layout_constraintBottom_toBottomOf="parent"

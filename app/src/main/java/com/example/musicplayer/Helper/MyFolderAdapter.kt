@@ -13,6 +13,8 @@ import com.example.musicplayer.Models.AlbumInfo
 import com.example.musicplayer.Models.SongInfo
 import com.example.musicplayer.R
 
+//ToDo this fixes  folder adapter
+
 var changNameFolder = "Title"
 var changAddressFolder = "Artist"
 

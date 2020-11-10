@@ -13,6 +13,8 @@ import android.widget.TextView
 import com.example.musicplayer.Models.SongInfo
 import com.example.musicplayer.R
 
+//ToDo this fixes  Music album adapter
+
 class MyMusicAlbumAd (context: Context, myListSong: ArrayList<SongInfo>) : BaseAdapter()  {
 
     companion object{

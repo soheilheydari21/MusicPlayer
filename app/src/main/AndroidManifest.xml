@@ -14,8 +14,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Less.FolderActivity"></activity>
-        <activity android:name=".Less.AlbumActivity" />
+
+        <activity android:name=".Less.FolderActivity"
+                  android:theme="@style/FolderLayout"/>
+
+        <activity android:name=".Less.AlbumActivity"
+                  android:theme="@style/AlbumLayout"/>
 
         <receiver android:name=".Widget.MusicWidget">
             <intent-filter>
@@ -30,17 +34,23 @@
         <activity
             android:name=".Screens.SpalshScreenActivity"
             android:noHistory="true"
-            android:theme="@style/SpalshTheme">
+            android:theme="@style/SpalshTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".Less.PlayActivity"
-            android:theme="@style/playLayout" />
-        <activity android:name=".Less.MainActivity" />
+            android:theme="@style/PlayLayout" />
+
+        <activity
+            android:name=".Less.MainActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

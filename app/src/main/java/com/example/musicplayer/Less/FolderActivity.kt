@@ -4,20 +4,17 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.musicplayer.Controllers.FragmentTracks
 import com.example.musicplayer.Helper.*
 import com.example.musicplayer.Models.SongInfo
 import com.example.musicplayer.R
-import com.example.musicplayer.Services.DataServis
-import kotlinx.android.synthetic.main.activity_album.*
-import kotlinx.android.synthetic.main.activity_album.textAlbumName
+import eightbitlab.com.blurview.RenderScriptBlur
 import kotlinx.android.synthetic.main.activity_folder.*
+import kotlinx.android.synthetic.main.activity_play.*
 
 class FolderActivity : AppCompatActivity() {
 
@@ -80,13 +77,11 @@ class FolderActivity : AppCompatActivity() {
             songList.adapter = MyMusicFolderAp(
                 this.applicationContext,
                 listofsongs
-            ){
-
-            }
-
+            )
 
         }
 
-
     }
+
+
 }

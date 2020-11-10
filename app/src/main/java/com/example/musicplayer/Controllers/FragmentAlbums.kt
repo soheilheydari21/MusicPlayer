@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.musicplayer.Less.AlbumActivity
-import com.example.musicplayer.Helper.MyAllbumAdapter
+import com.example.musicplayer.Helper.MyAlbumAdapter
 import com.example.musicplayer.Models.AlbumInfo
 import com.example.musicplayer.R
 
@@ -19,7 +19,7 @@ import com.example.musicplayer.R
 class FragmentAlbums : Fragment() {
 
     lateinit var RecycleAlbum:RecyclerView
-    lateinit var adapter : MyAllbumAdapter
+    lateinit var adapter : MyAlbumAdapter
 
     @SuppressLint("CutPasteId", "Recycle")
     override fun onCreateView(
@@ -27,7 +27,7 @@ class FragmentAlbums : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_two, container, false)
+        val view = inflater.inflate(R.layout.fragment_album, container, false)
 
         RecycleAlbum = view.findViewById(R.id.ReciycleViewAlbum)
 
@@ -40,7 +40,7 @@ class FragmentAlbums : Fragment() {
         val selection = MediaStore.Audio.Media.ALBUM + "!= 0"
         val sortOrder = MediaStore.Audio.Media.TITLE + " ASC"
         val cursor = activity!!.contentResolver.query(allsong,null,selection,null,sortOrder)
-        var listofsongs = ArrayList<AlbumInfo>()
+        val listofsongs = ArrayList<AlbumInfo>()
 
         if (cursor != null) {
             if (cursor.moveToFirst()) {
@@ -69,7 +69,7 @@ class FragmentAlbums : Fragment() {
             cursor.close()
 
             val songList = view.findViewById<RecyclerView>(R.id.ReciycleViewAlbum)
-            songList.adapter = MyAllbumAdapter(
+            songList.adapter = MyAlbumAdapter(
                 activity!!.applicationContext,
                 listofsongs
             ){
