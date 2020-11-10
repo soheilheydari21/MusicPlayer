@@ -1,4 +1,4 @@
 # MusicPlayer
-![Preview](https://user-images.githubusercontent.com/64285647/97933194-e43b8200-1d26-11eb-9932-7c440045e132.gif)
+![Untitled Project](https://user-images.githubusercontent.com/64285647/98635677-49204a80-22da-11eb-8290-bd87c949bfc0.gif)
 **This is an Offline Music Player
 which reads the songs on your Android device.**
