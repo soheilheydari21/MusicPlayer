@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="@color/colorStore"
     tools:context=".Less.FolderActivity">
 
 
@@ -60,7 +60,6 @@
         android:id="@+id/linearLayoutFolder"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/background_play"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +70,6 @@
             android:id="@+id/listMusicFolder"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="12dp"
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
             android:divider="@null" />

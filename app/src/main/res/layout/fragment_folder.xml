@@ -11,6 +11,8 @@
         android:id="@+id/ReciycleViewFolder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="2dp"
+        android:background="@color/colorPrimary"
         android:scrollbarDefaultDelayBeforeFade="400" />
 
 </FrameLayout>

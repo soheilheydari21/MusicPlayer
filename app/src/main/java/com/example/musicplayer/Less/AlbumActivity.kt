@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.music_album_item.*
 
 class AlbumActivity : AppCompatActivity() {
 
-
     @SuppressLint("Recycle")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,11 +28,11 @@ class AlbumActivity : AppCompatActivity() {
 
         setCoverAlbumActivity()
 
-        val allsong = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+        val allSongAlbum = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
         val selection = MediaStore.Audio.Media.IS_MUSIC + "!= 0"
         val sortOrder = MediaStore.Audio.Media.TITLE + " ASC"
-        val cursor = this.contentResolver.query(allsong,null,selection,null,sortOrder)
-        val listofsongs = ArrayList<SongInfo>()
+        val cursor = this.contentResolver.query(allSongAlbum,null,selection,null,sortOrder)
+        val listOfMusicAlbum = ArrayList<SongInfo>()
 
 
         if (cursor != null)
@@ -42,16 +41,16 @@ class AlbumActivity : AppCompatActivity() {
             {
                 do {
                     @Suppress("DEPRECATION")
-                    val songURL = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA))
-                    val songAuthor = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST))
-                    val songName = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME))
+                    val songAlbumURL = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA))
+                    val songAlbumDesc = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST))
+                    val songAlbumName = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE))
                     val cover = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID))
 
-                    listofsongs.add(
+                    listOfMusicAlbum.add(
                         SongInfo(
-                            songName,
-                            songAuthor,
-                            songURL,
+                            songAlbumName,
+                            songAlbumDesc,
+                            songAlbumURL,
                             cover
                         )
                     )
@@ -60,17 +59,17 @@ class AlbumActivity : AppCompatActivity() {
             }
             cursor.close()
 
-            val songList = findViewById<ListView>(R.id.listViewAlbum)
-            songList.adapter = MyMusicAlbumAd(
+            val songAlbumList = findViewById<ListView>(R.id.listViewAlbum)
+            songAlbumList.adapter = MyMusicAlbumAd(
                 this.applicationContext,
-                listofsongs
+                listOfMusicAlbum
             )
 
         }
 
     }
 
-    fun setCoverAlbumActivity()
+    private fun setCoverAlbumActivity()
     {
         if (changeCoverAlbum != null) {
             Glide.with(this).asBitmap()

@@ -18,13 +18,7 @@ import kotlinx.android.synthetic.main.activity_play.*
 
 class FolderActivity : AppCompatActivity() {
 
-    lateinit var RecyclerFolder: RecyclerView
-    lateinit var adapter : MyMusicFolderAp
-
-    companion object{
-        var musicAdapter: MyMusicFolderAp? = null
-        var Cover: ImageView? = null
-    }
+    private lateinit var recyclerFolder: RecyclerView
 
     @SuppressLint("CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,20 +28,20 @@ class FolderActivity : AppCompatActivity() {
         textFolderName.text = changNameFolder
         textAddressFolder.text = changAddressFolder
 
-        RecyclerFolder = findViewById(R.id.listMusicFolder)
+        recyclerFolder = findViewById(R.id.listMusicFolder)
 
-        RecyclerFolder.apply {
+        recyclerFolder.apply {
             setHasFixedSize(true)
             layoutManager = GridLayoutManager(this@FolderActivity,1)
         }
 
         FragmentTracks.Cover = findViewById(R.id.coverNavar)
 
-        val allsong = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
-//        val selection = MediaStore.Audio.Media.IS_MUSIC+ "!= 0"
+        val allMusicFolder = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+//        val selection = MediaStore.Audio.Media.ALBUM_ID + "!= 0"
         val sortOrder = MediaStore.Audio.Media.TITLE + " ASC"
-        val cursor = this.contentResolver.query(allsong,null,null,null,sortOrder)
-        val listofsongs = ArrayList<SongInfo>()
+        val cursor = this.contentResolver.query(allMusicFolder,null,null,null,sortOrder)
+        val listOfMusicFolder= ArrayList<SongInfo>()
 
         if (cursor != null)
         {
@@ -55,16 +49,16 @@ class FolderActivity : AppCompatActivity() {
             {
                 do {
                     @Suppress("DEPRECATION")
-                    val songURL = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA))
-                    val songAuthor = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST))
-                    val songName = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME))
+                    val songFolderURL = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA))
+                    val songFolderDesc = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST))
+                    val songFolderName = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE))
                     val cover = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TRACK))
 
-                    listofsongs.add(
+                    listOfMusicFolder.add(
                         SongInfo(
-                            songName,
-                            songAuthor,
-                            songURL,
+                            songFolderName,
+                            songFolderDesc,
+                            songFolderURL,
                             cover
                         )
                     )
@@ -73,10 +67,10 @@ class FolderActivity : AppCompatActivity() {
             }
             cursor.close()
 
-            val songList = findViewById<RecyclerView>(R.id.listMusicFolder)
-            songList.adapter = MyMusicFolderAp(
+            val songFolderList = findViewById<RecyclerView>(R.id.listMusicFolder)
+            songFolderList.adapter = MyMusicFolderAp(
                 this.applicationContext,
-                listofsongs
+                listOfMusicFolder
             )
 
         }

@@ -8,20 +8,77 @@
     tools:context=".Controllers.FragmentTracks"
     android:id="@+id/listLayout">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RecyclerViewTrack"
+    <LinearLayout
+        android:id="@+id/LayoutRecent"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
 
-    </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="3dp"
+            android:layout_weight="0"
+            android:background="@color/colorPrimary"
+            android:text="Recently Music"
+            android:textAlignment="viewStart"
+            android:textColor="#C8C7C7" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecyclerViewRecent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="2dp"
+            android:background="@color/colorPrimary"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:scrollbars="horizontal">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LayoutTrack"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.3"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="3dp"
+            android:text="Track Music"
+            android:textAlignment="viewStart"
+            android:textColor="#C8C7C7" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecyclerViewTrack"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/navarLayout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="#00FBFAFA"
-        android:backgroundTint="#00FFFFFF"
+        android:background="@drawable/background_play"
         android:foregroundTint="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/RecyclerViewTrack"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,11 +87,11 @@
 
         <com.rishabhharit.roundedimageview.RoundedImageView
             android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:background="#00FFFFFF"
             android:backgroundTint="#FFFFFF"
-            android:scaleType="center"
+            android:scaleType="fitXY"
             android:src="@drawable/back_navar_music"
             app:cornerRadius="22dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -45,28 +102,34 @@
 
         <ImageView
             android:id="@+id/imageViewNextN"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:layout_marginEnd="13dp"
-            android:src="@drawable/next_navar"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="1dp"
+            android:padding="2dp"
+            android:src="@drawable/next_navar1"
             app:layout_constraintBottom_toBottomOf="@+id/imageViewPlayN"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageViewPlayN" />
 
         <ImageView
             android:id="@+id/imageViewPlayN"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/play_navar"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            android:layout_marginEnd="1dp"
+            android:padding="2dp"
+            android:src="@drawable/play_navar1"
             app:layout_constraintBottom_toBottomOf="@+id/imageViewPreviewN"
             app:layout_constraintEnd_toStartOf="@+id/imageViewNextN"
             app:layout_constraintTop_toTopOf="@+id/imageViewPreviewN" />
 
         <ImageView
             android:id="@+id/imageViewPreviewN"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:src="@drawable/back_navar"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            android:layout_marginEnd="2dp"
+            android:padding="2dp"
+            android:src="@drawable/previouse_navar1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageViewPlayN"
             app:layout_constraintTop_toTopOf="parent" />
@@ -89,8 +152,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="6dp"
             android:layout_marginEnd="5dp"
+            android:layout_marginBottom="1dp"
             android:ellipsize="marquee"
             android:ems="10"
             android:marqueeRepeatLimit="marquee_forever"
@@ -99,9 +163,9 @@
             android:singleLine="true"
             android:text="title"
             android:textAlignment="viewStart"
-            android:textColor="#FFFFFF"
-            android:textColorHighlight="#131313"
-            android:textSize="20sp"
+            android:textColor="@color/colorWaith"
+            android:textColorHighlight="#121212"
+            android:textSize="19sp"
             app:layout_constraintBottom_toTopOf="@+id/textViewArtistN"
             app:layout_constraintEnd_toStartOf="@+id/imageViewPreviewN"
             app:layout_constraintStart_toEndOf="@+id/coverNavar"
@@ -112,7 +176,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="7dp"
             android:ellipsize="marquee"
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollbars="vertical"
@@ -120,12 +184,13 @@
             android:singleLine="true"
             android:text="artist"
             android:textAlignment="viewStart"
-            android:textColor="#EDE8E8"
-            android:textSize="16sp"
+            android:textColor="#DAD8D8"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageViewPreviewN"
             app:layout_constraintStart_toStartOf="@+id/textViewTitleN"
             tools:text="artist" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

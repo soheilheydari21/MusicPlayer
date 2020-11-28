@@ -7,11 +7,13 @@ import android.media.MediaPlayer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.BaseAdapter
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.musicplayer.Models.SongInfo
 import com.example.musicplayer.R
+import kotlinx.android.synthetic.main.activity_play.*
 
 //ToDo this fixes  Music album adapter
 
@@ -20,12 +22,12 @@ class MyMusicAlbumAd (context: Context, myListSong: ArrayList<SongInfo>) : BaseA
     companion object{
         var TextTrack: TextView? = null
         var ItemMusic: LinearLayout? = null
-        var myListSong = ArrayList<SongInfo>()
+        var myListSongAlbum = ArrayList<SongInfo>()
     }
 
     private val mContext: Context
     init {
-        MyMusicAlbumAd.myListSong = myListSong
+        myListSongAlbum = myListSong
         mContext = context
     }
 
@@ -34,36 +36,24 @@ class MyMusicAlbumAd (context: Context, myListSong: ArrayList<SongInfo>) : BaseA
 
         val layoutInflate = LayoutInflater.from(mContext)
         val myView = layoutInflate.inflate(R.layout.music_album_item,parent,false)
-        val song = MyMusicAlbumAd.myListSong[position]
+        val song = myListSongAlbum[position]
 
         TextTrack = myView.findViewById(R.id.textNameTrack)
         ItemMusic = myView.findViewById(R.id.PlayAlbum)
-
-        MyMusicAlbumAd.TextTrack?.text = song.Title
+        TextTrack?.text = song.Title
 
         if (mediaPlayer == null)
             mediaPlayer = MediaPlayer()
 
-        var flags = true
-        MyMusicAlbumAd.ItemMusic?.setOnClickListener {
-            if (!flags)
-            {
-                mediaPlayer!!.stop()
-                myView.findViewById<TextView>(R.id.textNameTrack).setTextColor(Color.parseColor("#ffffff"))
-                flags = true
 
-            }
-            else if (flags)
-            {
-                mediaPlayer!!.reset()
-                mediaPlayer!!.setDataSource(song.SongURL)
-                mediaPlayer!!.prepare()
-                mediaPlayer!!.start()
+        ItemMusic?.setOnClickListener {
+            mediaPlayer!!.reset()
+            mediaPlayer!!.setDataSource(song.SongURL)
+            mediaPlayer!!.prepare()
+            mediaPlayer!!.start()
 
-                myView.findViewById<TextView>(R.id.textNameTrack).setTextColor(Color.parseColor("#13f8d1"))
-                myView.findViewById<TextView>(R.id.textNameTrack).isSelected = true
-                flags = false
-            }
+            myView.findViewById<TextView>(R.id.textNameTrack).setTextColor(Color.parseColor("#13f8d1"))
+            myView.findViewById<TextView>(R.id.textNameTrack).isSelected = true
             songe = song
         }
         return myView
@@ -71,7 +61,7 @@ class MyMusicAlbumAd (context: Context, myListSong: ArrayList<SongInfo>) : BaseA
     }
 
     override fun getItem(position: Int): Any {
-        return MyMusicAlbumAd.myListSong[position]
+        return myListSongAlbum[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -79,7 +69,7 @@ class MyMusicAlbumAd (context: Context, myListSong: ArrayList<SongInfo>) : BaseA
     }
 
     override fun getCount(): Int {
-        return MyMusicAlbumAd.myListSong.size
+        return myListSongAlbum.size
     }
 
 }

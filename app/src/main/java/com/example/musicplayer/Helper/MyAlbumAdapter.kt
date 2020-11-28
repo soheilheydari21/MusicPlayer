@@ -5,7 +5,9 @@ import android.media.MediaMetadataRetriever
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -14,7 +16,6 @@ import com.example.musicplayer.R
 
 //ToDo this fixes   Album adapter
 
-var adaptere: MyAlbumAdapter?= null
 var changTextAlbum = "Title"
 var changTextArtistAlbum = "Artist"
 var changeCoverAlbum: ByteArray? = null
@@ -31,7 +32,7 @@ class MyAlbumAdapter(
 
     private val mContext: Context
     init {
-        MyAlbumAdapter.myAlbumSong = albums
+        myAlbumSong = albums
         mContext = context
     }
 
@@ -45,23 +46,20 @@ class MyAlbumAdapter(
     }
 
     override fun onBindViewHolder(holder: MyAlbumAdapter.AlbumHolder, position: Int) {
-        return holder.bindAlbum(albums[position], context, position)
+        return holder.bindAlbum(albums[position], position)
     }
 
     inner class AlbumHolder(itemView: View?, val itemClicked: (AlbumInfo) -> Unit) : RecyclerView.ViewHolder(itemView!!)
     {
         private var setAlbumOne = itemView?.findViewById<ImageView>(R.id.imageViewCoverAllbum)
         private var setAlbumTwo = itemView?.findViewById<ImageView>(R.id.imageViewCoverAllbum2)
-        private var setAlbumThree = itemView?.findViewById<ImageView>(R.id.imageViewCoverAllbum3)
         private var albumTitle = itemView?.findViewById<TextView>(R.id.textViewTitleAllbum)
         private var albumArtist = itemView?.findViewById<TextView>(R.id.textViewArtistAllbum)
 
-        fun bindAlbum(albuminfo:AlbumInfo, context:Context, position: Int)
+        fun bindAlbum(albumInfo:AlbumInfo,  position: Int)
         {
-            val resourceId = context.resources.getIdentifier(albuminfo.album, "drawable", context.packageName)
-
-            albumTitle?.text = albuminfo.title
-            albumArtist?.text = albuminfo.artist
+            albumTitle?.text = albumInfo.title
+            albumArtist?.text = albumInfo.artist
 
             //cover
             val image = albums[position].getpach()?.let { getAlbumArt(it) }
@@ -78,7 +76,7 @@ class MyAlbumAdapter(
                     Glide.with(mContext)
                         .load(R.drawable.coverrrl)
                         .into(it)
-                };
+                }
             }
 
             //cover2
@@ -95,32 +93,16 @@ class MyAlbumAdapter(
                     Glide.with(mContext)
                         .load(R.drawable.coverrrl)
                         .into(it)
-                };
-            }
-
-            //cover3
-            if(image != null)
-            {
-                setAlbumThree?.let {
-                    Glide.with(mContext).asBitmap()
-                        .load(image)
-                        .into(it)
                 }
             }
-            else{
-                setAlbumThree?.let {
-                    Glide.with(mContext)
-                        .load(R.drawable.coverrrl)
-                        .into(it)
-                };
-            }
 
-            itemView.setOnClickListener { itemClicked(albuminfo)
+            itemView.setOnClickListener { itemClicked(albumInfo)
                 changTextAlbum = albumTitle?.text.toString()
                 changTextArtistAlbum = albumArtist?.text.toString()
                 changeCoverAlbum = image
             }
         }
+
 
     }
 

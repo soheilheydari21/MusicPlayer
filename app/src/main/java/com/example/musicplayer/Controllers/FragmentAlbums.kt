@@ -8,17 +8,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.musicplayer.Less.AlbumActivity
 import com.example.musicplayer.Helper.MyAlbumAdapter
 import com.example.musicplayer.Models.AlbumInfo
 import com.example.musicplayer.R
+import kotlinx.android.synthetic.main.activity_play.*
 
 
 class FragmentAlbums : Fragment() {
 
-    lateinit var RecycleAlbum:RecyclerView
+    lateinit var recyclerAlbum:RecyclerView
     lateinit var adapter : MyAlbumAdapter
 
     @SuppressLint("CutPasteId", "Recycle")
@@ -29,38 +32,38 @@ class FragmentAlbums : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_album, container, false)
 
-        RecycleAlbum = view.findViewById(R.id.ReciycleViewAlbum)
+        recyclerAlbum = view.findViewById(R.id.ReciycleViewAlbum)
 
-        RecycleAlbum.apply {
+        recyclerAlbum.apply {
             setHasFixedSize(true)
             layoutManager = GridLayoutManager(activity,2)
         }
 
-        val allsong = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+        val allAlbum = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
         val selection = MediaStore.Audio.Media.ALBUM + "!= 0"
         val sortOrder = MediaStore.Audio.Media.TITLE + " ASC"
-        val cursor = activity!!.contentResolver.query(allsong,null,selection,null,sortOrder)
-        val listofsongs = ArrayList<AlbumInfo>()
+        val cursor = activity!!.contentResolver.query(allAlbum,null,selection,null,sortOrder)
+        val listOfAlbum = ArrayList<AlbumInfo>()
 
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
                     @Suppress("DEPRECATION")
-                    val songURL = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA))
-                    val songAuthor = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST))
-                    val songName = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME))
+                    val albumURL = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA))
+                    val albumDesc = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST))
+                    val albumName = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM))
                     val album = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM))
                     val album2 = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM))
                     val album3 = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM))
 
-                    listofsongs.add(
+                    listOfAlbum.add(
                         AlbumInfo(
                             album,
                             album2,
                             album3,
-                            songName,
-                            songAuthor,
-                            songURL
+                            albumName,
+                            albumDesc,
+                            albumURL
                         )
                     )
 
@@ -68,17 +71,19 @@ class FragmentAlbums : Fragment() {
             }
             cursor.close()
 
-            val songList = view.findViewById<RecyclerView>(R.id.ReciycleViewAlbum)
-            songList.adapter = MyAlbumAdapter(
+            val albumList = view.findViewById<RecyclerView>(R.id.ReciycleViewAlbum)
+            albumList.adapter = MyAlbumAdapter(
                 activity!!.applicationContext,
-                listofsongs
+                listOfAlbum
             ){
                 val intent = Intent(context, AlbumActivity::class.java)
                 startActivity(intent)
-            }
-        }
 
+            }
+
+        }
          return view
+
     }
 
 

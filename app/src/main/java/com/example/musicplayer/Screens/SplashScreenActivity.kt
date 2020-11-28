@@ -7,7 +7,7 @@ import android.os.Handler
 import com.example.musicplayer.Less.MainActivity
 import com.example.musicplayer.R
 
-class SpalshScreenActivity : AppCompatActivity() {
+class SplashScreenActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -30,7 +30,7 @@ class MyFolderAdapter(
 
     private val mContext: Context
     init {
-        MyFolderAdapter.myFolderSong = folders
+        myFolderSong = folders
         mContext = context
     }
 
@@ -44,22 +44,20 @@ class MyFolderAdapter(
     }
 
     override fun onBindViewHolder(holder: MyFolderAdapter.FolderHolder, position: Int) {
-        return holder.bindFolder(folders[position], context, position)
+        return holder.bindFolder(folders[position])
     }
 
     inner class FolderHolder(itemView: View?, val itemClicked: (SongInfo) -> Unit) : RecyclerView.ViewHolder(itemView!!)
     {
-        private var setCoverFolder = itemView?.findViewById<ImageView>(R.id.coverFolder)
         private var folderTitle = itemView?.findViewById<TextView>(R.id.folderName)
         private var folderAddress = itemView?.findViewById<TextView>(R.id.folderAddres)
 
-        fun bindFolder(songinfo:SongInfo, context:Context, position: Int)
+        fun bindFolder(songInfo:SongInfo)
         {
-            val resourceId = context.resources.getIdentifier(songinfo.Cover, "drawable", context.packageName)
-            folderTitle?.text = songinfo.Title
-            folderAddress?.text = songinfo.Desc
+            folderTitle?.text = songInfo.Title
+            folderAddress?.text = songInfo.Desc
 
-            itemView.setOnClickListener { itemClicked(songinfo)
+            itemView.setOnClickListener { itemClicked(songInfo)
                 changNameFolder = folderTitle?.text.toString()
                 changAddressFolder = folderAddress?.text.toString()
 

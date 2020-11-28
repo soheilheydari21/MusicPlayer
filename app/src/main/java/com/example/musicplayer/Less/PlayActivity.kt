@@ -3,41 +3,29 @@
 package com.example.musicplayer.Less
 
 import android.annotation.SuppressLint
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context
-import android.content.Intent
-import android.graphics.drawable.Drawable
+import android.content.ContentValues
 import android.media.AudioManager
-import android.media.MediaMetadataRetriever
 import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
-import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.*
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import com.bumptech.glide.Glide
-import com.example.musicplayer.Controllers.FragmentTracks
+import com.example.musicplayer.DataBase.DBManager
 import com.example.musicplayer.Helper.*
-import com.example.musicplayer.Helper.MyTrackAdapter.Companion.myListSong
+import com.example.musicplayer.Helper.MyTrackAdapter.Companion.myListTrack
 //import com.example.musicplayer.Activity.PlayActivity.seecbar.*
 import com.example.musicplayer.R
-import com.example.musicplayer.Models.SongInfo
 import com.example.musicplayer.Services.DataService.Companion.playSong
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetView
-import eightbitlab.com.blurview.BlurView
 import eightbitlab.com.blurview.RenderScriptBlur
 //import com.jackandphantom.blurimage.BlurImage
 //import com.example.musicplayer.Activity.PlayActivity.seecbar.mySongThread
 import kotlinx.android.synthetic.main.activity_play.*
-import kotlinx.android.synthetic.main.music_album_item.*
 import kotlin.random.Random
 
 var totalTime: Int = 0
@@ -48,14 +36,8 @@ class PlayActivity : AppCompatActivity() {
     companion object{
         var seekbar:SeekBar? = null
         var Pause:ImageView? = null
-        var TitlePlay:TextView? = null
-        var uri:Uri? = null
         var position:Int = -1
     }
-
-    //  Notification
-    var listSongs = ArrayList<SongInfo>()
-    private var CHANNEL_ID = "Your_Channel_ID"
 
 
     @SuppressLint("ResourceType")
@@ -69,40 +51,15 @@ class PlayActivity : AppCompatActivity() {
 
         setCoverPlayActivity()
 
-        setCoverBlue()
+        setCoverBlur()
 
         seekbar = findViewById(R.id.seekBar)
         Pause = findViewById(R.id.imagePause)
-        TitlePlay = findViewById(R.id.textViewTitle2)
-
         totalTime = mediaPlayer!!.duration
-
-        //  Notification 2
-        CreatNotificationChannel()
-        val notificationLayout = RemoteViews(packageName,R.layout.notification)
-        val builder = NotificationCompat.Builder(this,CHANNEL_ID)
-            .setContentTitle("Your Title")
-            .setSmallIcon(R.drawable.ic_baseline_music_note_24)
-            .setStyle(NotificationCompat.DecoratedCustomViewStyle())
-            .setCustomContentView(notificationLayout)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
         // Set text Artist & Title
         textViewTitle2.text = changTextTitle
         textViewArtist2.text = changTextArtist
-
-        // SeekBar
-        var TestAdapter = mySongThread()
-        mySongThread().start()
-
-        //  Notification 3
-        coverPlayActivity.setOnClickListener {
-
-            with(NotificationManagerCompat.from(this)){
-                notify(0,builder.build())
-            }
-        }
-
 
         //ToDo  More => create list
         imageCreate.setOnClickListener {
@@ -118,13 +75,29 @@ class PlayActivity : AppCompatActivity() {
             if (isLike) {
                 imageHeart.setImageResource(R.drawable.heart1)
                 isLike = false
-                Toast.makeText(this," Add song to Favourite list ",Toast.LENGTH_SHORT).show()
-                animationHeart()
+                animationLike()
+
+                //database
+                val dbManager = DBManager(this)
+                val values = ContentValues()
+                values.put("Title", textViewTitle2.text.toString())
+                values.put("Artist", textViewArtist2.text.toString())
+                values.put("Cover", Glide.with(this)
+                    .asBitmap()
+                    .load(R.id.coverPlayActivity)
+                    .toString())
+
+                val ID = dbManager.Insert(values)
+                if (ID > 0)
+                    Toast.makeText(this," Add song to Favourite list ",Toast.LENGTH_SHORT).show()
+                else
+                    Toast.makeText(this," ERROR!! NOT Add song to Favourite list ",Toast.LENGTH_SHORT).show()
+
 
             }else if (!isLike){
                 imageHeart.setImageResource(R.drawable.heart)
                 isLike = true
-                animationHeart()
+                animationLike()
             }
         }
 
@@ -165,7 +138,7 @@ class PlayActivity : AppCompatActivity() {
         }).start()
 
         if (mediaPlayer!!.isPlaying)
-            imagePause.setImageResource(R.drawable.pause);
+            imagePause.setImageResource(R.drawable.pause)
 
         //btn pause
         imagePause.setOnClickListener {
@@ -189,14 +162,18 @@ class PlayActivity : AppCompatActivity() {
 
         randomButton.setOnClickListener {
             if (isShuffle) {
-                randomButton.setImageResource(R.drawable.random);
-                isShuffle = false;
+                randomButton.setImageResource(R.drawable.random)
+                isShuffle = false
+                animationShuffle()
 
-            }else{
-                randomButton.setImageResource(R.drawable.random1);
-                isShuffle = true;
-                imageTekrar.setImageResource(R.drawable.refresh);
-                isRepeat = false;
+            }
+            else if(!isShuffle){
+                randomButton.setImageResource(R.drawable.random1)
+                isShuffle = true
+                imageTekrar.setImageResource(R.drawable.refresh)
+                isRepeat = false
+                animationShuffle()
+
             }
         }
 
@@ -208,12 +185,14 @@ class PlayActivity : AppCompatActivity() {
                 isRepeat = false
                 animationRepeat()
 
-            }else{
+            }
+            else if (!isRepeat) {
                 imageTekrar.setImageResource(R.drawable.refresh1)
                 isRepeat = true
                 randomButton.setImageResource(R.drawable.random)
                 isShuffle = false
                 animationRepeat()
+
             }
         }
 
@@ -225,13 +204,13 @@ class PlayActivity : AppCompatActivity() {
             }
             else if (isShuffle)
             {
-                val rand:Random = Random
-                currentSongIndex = rand.nextInt((myListSong.size - 1))
+                val rand = Random
+                currentSongIndex = rand.nextInt((myListTrack.size - 1))
                 playSong(currentSongIndex)
             }
             else
             {
-                if (currentSongIndex<(myListSong.size - 1))
+                if (currentSongIndex<(myListTrack.size - 1))
                 {
                     playSong(currentSongIndex + 1)
                     currentSongIndex += 1
@@ -245,7 +224,7 @@ class PlayActivity : AppCompatActivity() {
         }
 
         //btn forward
-        var currentPosition: Int = 0
+        var currentPosition = 0
         val duration = mediaPlayer!!.duration
 
         btnForward.setOnClickListener {
@@ -254,11 +233,12 @@ class PlayActivity : AppCompatActivity() {
             {
                 currentPosition += 5000
                 mediaPlayer!!.seekTo(currentPosition)
+                animationForward()
             }
         }
 
         //btn backward
-        var backwardTime: Int = 5000
+        var backwardTime = 5000
 
         btnBackward.setOnClickListener {
             currentPosition = mediaPlayer!!.currentPosition
@@ -266,6 +246,7 @@ class PlayActivity : AppCompatActivity() {
             {
                 currentPosition -= 5000
                 mediaPlayer!!.seekTo(currentPosition)
+                animationBackward()
             }
         }
 
@@ -275,11 +256,12 @@ class PlayActivity : AppCompatActivity() {
                 val maxVolume = audioManager.mediaMaxVolume
                 val randomIndex = Random.nextInt(((maxVolume - 0) + 1) + 0)
                 audioManager.setMediaVolume(randomIndex)
-
+                animationSpeaker()
         }
 
         //btn list
         baseline.setOnClickListener {
+            animationList()
             onBackPressed()
         }
     }
@@ -295,9 +277,9 @@ class PlayActivity : AppCompatActivity() {
         )
     }
 
-    private val AudioManager.mediaMaxVolume:Int
+    private val AudioManager.mediaMaxVolume
     get() = this.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
-    val AudioManager.mediaCurrentVolume:Int
+    val AudioManager.mediaCurrentVolume
     get() = this.getStreamVolume(AudioManager.STREAM_MUSIC)
 
     //seekBar 2
@@ -308,41 +290,24 @@ class PlayActivity : AppCompatActivity() {
         override fun handleMessage(msg: Message) {
             val currentPosition = msg.what
             seekBar.progress = currentPosition
-            val elapsedTime = createTimeLable(currentPosition)
+            val elapsedTime = createTimeLabel(currentPosition)
             elapsedTimeLable.text = elapsedTime
 
-            val remaningTime = createTimeLable(totalTime - currentPosition)
-            totalTimer.text = "-$remaningTime"
+            val remainingTime = createTimeLabel(totalTime - currentPosition)
+            totalTimer.text = "-$remainingTime"
 
         }
     }
 
-    fun createTimeLable(time: Int): String {
-        var timeLable = ""
+    fun createTimeLabel(time: Int): String {
+        var timeLabel = ""
         val min = time / 1000 / 60
         val sec = time / 1000 % 60
 
-        timeLable = "$min:"
-        if (sec < 10) timeLable += "0"
-        timeLable += sec
-        return timeLable
-    }
-
-    //  Notification 4
-    private fun CreatNotificationChannel()
-    {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-        {
-            val name = "App Notification"
-            val descriptionText = "This is your notification description"
-            val importance : Int = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(CHANNEL_ID,name,importance).apply {
-                description = descriptionText
-            }
-
-            val notificationManager : NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-        }
+        timeLabel = "$min:"
+        if (sec < 10) timeLabel += "0"
+        timeLabel += sec
+        return timeLabel
     }
 
 
@@ -352,7 +317,7 @@ class PlayActivity : AppCompatActivity() {
             while (true)
             {
                 try {
-                    Thread.sleep(1000)
+                    sleep(1000)
                 }
                 catch (ex:Exception)
                 {
@@ -367,7 +332,7 @@ class PlayActivity : AppCompatActivity() {
         }
     }
 
-    fun setCoverPlayActivity()
+    private fun setCoverPlayActivity()
     {
         if (changeCover != null) {
             Glide.with(this).asBitmap()
@@ -382,7 +347,7 @@ class PlayActivity : AppCompatActivity() {
         }
     }
 
-    fun setCoverBlue()
+    private fun setCoverBlur()
     {
         if (changeCover != null) {
             Glide.with(this).asBitmap()
@@ -399,12 +364,9 @@ class PlayActivity : AppCompatActivity() {
 
     private fun blurBackground()
     {
-        val radius:Float = 22f
-
+        val radius = 22f
         val decorView = window.decorView
-
         val rootView:ViewGroup = decorView.findViewById(android.R.id.content)
-
         val windowBackground = decorView.background
 
         blurView.setupWith(rootView)
@@ -418,20 +380,50 @@ class PlayActivity : AppCompatActivity() {
     //animation
     private fun animationPause()
     {
-        val animPause = AnimationUtils.loadAnimation(this, R.anim.anim_pause)
-        imagePause.startAnimation(animPause)
+        val animScale = AnimationUtils.loadAnimation(this, R.anim.anim_pause)
+        imagePause.startAnimation(animScale)
     }
 
-    private fun animationHeart()
+    private fun animationLike()
     {
-        val animHeart = AnimationUtils.loadAnimation(this, R.anim.anim_pause)
-        imageHeart.startAnimation(animHeart)
+        val animScale = AnimationUtils.loadAnimation(this, R.anim.anim_pause)
+        imageHeart.startAnimation(animScale)
     }
 
     private fun animationRepeat()
     {
-        val animRepeat = AnimationUtils.loadAnimation(this, R.anim.anim_repeat)
-        imageTekrar.startAnimation(animRepeat)
+        val animScale = AnimationUtils.loadAnimation(this, R.anim.anim_repeat)
+        imageTekrar.startAnimation(animScale)
+    }
+
+    private fun animationList()
+    {
+        val animScale = AnimationUtils.loadAnimation(this, R.anim.anim_backward)
+        baseline.startAnimation(animScale)
+    }
+
+    private fun animationBackward()
+    {
+        val animScale = AnimationUtils.loadAnimation(this, R.anim.anim_backward)
+        btnBackward.startAnimation(animScale)
+    }
+
+    private fun animationForward()
+    {
+        val animScale = AnimationUtils.loadAnimation(this, R.anim.anim_backward)
+        btnForward.startAnimation(animScale)
+    }
+
+    private fun animationShuffle()
+    {
+        val animScale = AnimationUtils.loadAnimation(this, R.anim.anim_backward)
+        randomButton.startAnimation(animScale)
+    }
+
+    private fun animationSpeaker()
+    {
+        val animScale = AnimationUtils.loadAnimation(this, R.anim.anim_backward)
+        imageSpeaker.startAnimation(animScale)
     }
 
 
@@ -470,7 +462,6 @@ class PlayActivity : AppCompatActivity() {
 //            }
 //        }
 //    }
-
 
 
 

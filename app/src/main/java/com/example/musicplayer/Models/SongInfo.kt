@@ -32,5 +32,20 @@ public final class SongInfo {
         this.Title = title
     }
 
+    fun getdesc(): String? {
+        return Desc
+    }
+
+    fun setdesc(desc: String) {
+        this.Desc = desc
+    }
+
+    fun getimage(): String? {
+        return Cover
+    }
+
+    fun setimage(cover: String) {
+        this.Cover = cover
+    }
 
 }

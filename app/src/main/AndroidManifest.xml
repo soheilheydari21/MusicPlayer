@@ -10,16 +10,27 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="MUSIC OverFlow"
+        android:label="MUSIC overFlow"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".Less.AboutActivity"
+            android:theme="@style/AboutLayout"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Less.SearchActivity"
+            android:theme="@style/SearchLayout"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".Less.FolderActivity"
-                  android:theme="@style/FolderLayout"/>
+        <service android:name=".Services.MediaPlayerService" />
 
-        <activity android:name=".Less.AlbumActivity"
-                  android:theme="@style/AlbumLayout"/>
+        <activity
+            android:name=".Less.FolderActivity"
+            android:theme="@style/FolderLayout" />
+        <activity
+            android:name=".Less.AlbumActivity"
+            android:theme="@style/AlbumLayout" />
 
         <receiver android:name=".Widget.MusicWidget">
             <intent-filter>
@@ -32,25 +43,22 @@
         </receiver>
 
         <activity
-            android:name=".Screens.SpalshScreenActivity"
+            android:name=".Screens.SplashScreenActivity"
             android:noHistory="true"
-            android:theme="@style/SpalshTheme"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/SpalshTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Less.PlayActivity"
             android:theme="@style/PlayLayout" />
-
         <activity
             android:name=".Less.MainActivity"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

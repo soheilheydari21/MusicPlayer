@@ -18,10 +18,10 @@ import com.example.musicplayer.Models.AlbumInfo
 import com.example.musicplayer.Models.SongInfo
 import com.example.musicplayer.R
 
+@Suppress("DEPRECATION")
 class FragmentFolders : Fragment() {
 
-    lateinit var RecycleFolder: RecyclerView
-    lateinit var adapter : MyFolderAdapter
+    private lateinit var recyclerFolder: RecyclerView
 
     @SuppressLint("CutPasteId", "Recycle")
     override fun onCreateView(
@@ -30,32 +30,32 @@ class FragmentFolders : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_folder, container, false)
-        RecycleFolder = view.findViewById(R.id.ReciycleViewFolder)
+        recyclerFolder = view.findViewById(R.id.ReciycleViewFolder)
 
-        RecycleFolder.apply {
+        recyclerFolder.apply {
             setHasFixedSize(true)
-            layoutManager = GridLayoutManager(activity,2)
+            layoutManager = GridLayoutManager(activity,1)
         }
         
         val allFolder = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
-        val selection = MediaStore.Audio.Media.TRACK+ "!= 0"
-        val sortOrder = MediaStore.Audio.Media.TITLE + " ASC"
+        val selection = MediaStore.Audio.AudioColumns.TRACK
+        val sortOrder = MediaStore.Audio.AudioColumns.TITLE + " ASC"
         val cursor = activity!!.contentResolver.query(allFolder,null,selection,null,sortOrder)
-        val listofFolders = ArrayList<SongInfo>()
+        val listOfFolders = ArrayList<SongInfo>()
 
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
                     @Suppress("DEPRECATION")
-                    val folderURL = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA))
-                    val folderAuthor = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST))
-                    val folderName = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME))
-                    val folderIcon = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM))
+                    val folderURL = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.DATA))
+                    val folderDesc = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.DATA))
+                    val folderName = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.TITLE))
+                    val folderIcon = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.ALBUM))
 
-                    listofFolders.add(
+                    listOfFolders.add(
                         SongInfo(
                             folderName,
-                            folderAuthor,
+                            folderDesc,
                             folderURL,
                             folderIcon
                         )
@@ -65,10 +65,10 @@ class FragmentFolders : Fragment() {
             }
             cursor.close()
 
-            val songList = view.findViewById<RecyclerView>(R.id.ReciycleViewFolder)
-            songList.adapter = MyFolderAdapter(
+            val folderList = view.findViewById<RecyclerView>(R.id.ReciycleViewFolder)
+            folderList.adapter = MyFolderAdapter(
                 activity!!.applicationContext,
-                listofFolders
+                listOfFolders
             ){
                 val intent = Intent(context, FolderActivity::class.java)
                 startActivity(intent)

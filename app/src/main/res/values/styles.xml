@@ -3,8 +3,8 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#000000</item>
-        <item name="colorPrimaryDark">#F3000000</item>
+        <item name="colorPrimary">@color/colorStore</item>
+        <item name="colorPrimaryDark">@color/colorStore</item>
         <item name="colorAccent">@color/colorAccent</item>
 
     </style>
@@ -22,16 +22,20 @@
     </style>
 
     <style name="AlbumLayout" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimaryDark">@color/colorBlack</item>
+        <item name="colorPrimaryDark">@color/colorStore</item>
     </style>
 
     <style name="FolderLayout" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimaryDark">@color/colorBlack</item>
+        <item name="colorPrimaryDark">@color/colorStore</item>
     </style>
 
+    <style name="SearchLayout" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+    </style>
 
-
-
+    <style name="AboutLayout" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimaryDark">@color/colorStore</item>
+    </style>
 
 
 </resources>
