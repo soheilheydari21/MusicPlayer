@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorStore"
-    tools:context=".Less.AlbumActivity">
+    tools:context=".Ui.AlbumActivity">
 
     <com.rishabhharit.roundedimageview.RoundedImageView
         android:id="@+id/imageViewCoverAlbum"

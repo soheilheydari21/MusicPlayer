@@ -4,15 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Less.PlayActivity">
-
+    tools:context=".Ui.PlayActivity">
 
 
     <ImageView
         android:id="@+id/imageblur"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="50dp"
         android:scaleType="centerCrop"
         android:src="@drawable/matt"
         app:layout_constraintBottom_toTopOf="parent"
@@ -33,23 +31,23 @@
 
     <ImageView
         android:id="@+id/imageSpeaker"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="33dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="34dp"
+        android:padding="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/speaker" />
+        app:layout_constraintTop_toTopOf="@+id/guideline3"
+        app:srcCompat="@drawable/sound_new" />
 
 
     <com.rishabhharit.roundedimageview.RoundedImageView
         android:id="@+id/coverPlayActivity"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="20dp"
         android:scaleType="fitXY"
         android:src="@drawable/coverrrl"
         app:civ_border_color="#00d6b3"
@@ -58,12 +56,33 @@
         app:civ_shadow_color="#70706D"
         app:civ_shadow_radius="7dp"
         app:cornerRadius="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintDimensionRatio="h,1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/imageSpeaker"
         app:roundedCorners="all" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.96" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -81,8 +100,8 @@
         android:id="@+id/elapsedTimeLable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="14dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="16dp"
         android:text="00:00"
         android:textColor="#FFFFFF"
         android:textSize="13sp"
@@ -93,7 +112,7 @@
         android:id="@+id/textViewArtist2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="9dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="8dp"
         android:ellipsize="marquee"
@@ -149,6 +168,7 @@
         android:layout_width="29dp"
         android:layout_height="29dp"
         android:layout_marginBottom="15dp"
+        android:padding="1dp"
         app:layout_constraintBottom_toTopOf="@+id/seekBar"
         app:layout_constraintEnd_toEndOf="@+id/imageTekrar"
         app:srcCompat="@drawable/heart" />
@@ -173,6 +193,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginEnd="28dp"
         android:layout_marginBottom="30dp"
+        android:paddingStart="19dp"
         android:progressBackgroundTint="#FFFDFD"
         android:progressTint="#00a273"
         app:layout_constraintBottom_toTopOf="@+id/randomButton"
@@ -184,6 +205,7 @@
         android:layout_width="27dp"
         android:layout_height="26dp"
         android:layout_marginBottom="20dp"
+        android:padding="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageTekrar"
         app:srcCompat="@drawable/more" />
@@ -192,8 +214,8 @@
         android:id="@+id/totalTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="7dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="16dp"
         android:text="00:00"
         android:textColor="#FFFFFF"
         android:textSize="13sp"
@@ -205,6 +227,7 @@
         android:id="@+id/imageTekrar"
         android:layout_width="28dp"
         android:layout_height="28dp"
+        android:padding="2dp"
         app:layout_constraintBottom_toBottomOf="@+id/btnForward"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -228,6 +251,7 @@
         android:layout_width="28dp"
         android:layout_height="28dp"
         android:layout_marginBottom="17dp"
+        android:padding="2dp"
         app:layout_constraintBottom_toTopOf="@+id/baseline"
         app:layout_constraintEnd_toStartOf="@+id/btnBackward"
         app:layout_constraintHorizontal_bias="0.5"
@@ -238,24 +262,11 @@
         android:id="@+id/baseline"
         android:layout_width="27dp"
         android:layout_height="27dp"
+        android:padding="2dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageCreate"
         app:layout_constraintStart_toStartOf="@+id/randomButton"
         app:layout_constraintTop_toTopOf="@+id/imageCreate"
         app:srcCompat="@drawable/playlist" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.09" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.64" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

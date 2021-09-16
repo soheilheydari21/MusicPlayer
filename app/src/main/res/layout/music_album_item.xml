@@ -3,7 +3,7 @@
     android:id="@+id/PlayAlbum"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#0e0e0f">
+    android:background="#000E0E0F">
 
     <TextView
         android:id="@+id/numberTrack"

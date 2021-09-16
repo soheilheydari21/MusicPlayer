@@ -26,25 +26,29 @@
 
         <TextView
             android:id="@+id/textViewTitleAllbum"
-            android:layout_width="170dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="125dp"
             android:ellipsize="marquee"
+            android:gravity="center"
             android:marqueeRepeatLimit="marquee_forever"
             android:singleLine="true"
             android:text="Album Name"
             android:textAlignment="center"
             android:textColor="#FDFDFD"
             android:textSize="15sp"
+            app:flow_horizontalAlign="center"
+            app:flow_verticalAlign="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textViewArtistAllbum"
-            android:layout_width="160dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
+            android:gravity="center"
             android:marqueeRepeatLimit="marquee_forever"
             android:singleLine="true"
             android:text="Artist"
@@ -77,22 +81,6 @@
             app:roundedCorners="all"
             app:srcCompat="@drawable/coverrrl" />
 
-        <com.rishabhharit.roundedimageview.RoundedImageView
-            android:id="@+id/imageViewCoverAllbum"
-            android:layout_width="match_parent"
-            android:layout_height="155dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="2dp"
-            android:scaleType="centerCrop"
-            app:civ_border_color="#00d6b3"
-            app:civ_border_width="3dp"
-            app:cornerRadius="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/imageViewCoverAllbum2"
-            app:layout_constraintTop_toTopOf="@+id/imageViewCoverAllbum2"
-            app:roundedCorners="all"
-            app:srcCompat="@drawable/coverrrl" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

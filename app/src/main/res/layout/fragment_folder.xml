@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#000000"
     android:orientation="vertical"
-    tools:context=".Controllers.FragmentFolders">
+    tools:context=".Ui.Controllers.FragmentFolders">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ReciycleViewFolder"
@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="2dp"
         android:background="@color/colorPrimary"
+        android:paddingBottom="56dp"
         android:scrollbarDefaultDelayBeforeFade="400" />
 
 </FrameLayout>

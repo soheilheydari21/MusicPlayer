@@ -64,7 +64,7 @@
         android:layout_marginStart="27dp"
         android:layout_marginTop="4dp"
         android:layout_toRightOf="@id/imageView13"
-        android:src="@drawable/back_navar" />
+        android:src="@drawable/ic_round_previous" />
 
     <ImageView
         android:id="@+id/imageView15"
@@ -74,7 +74,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="4dp"
         android:layout_toRightOf="@id/imageView14"
-        android:src="@drawable/play_navar" />
+        android:src="@drawable/ic_round_play" />
 
     <ImageView
         android:id="@+id/imageView16"
@@ -84,7 +84,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="4dp"
         android:layout_toRightOf="@id/imageView15"
-        android:src="@drawable/next_navar" />
+        android:src="@drawable/ic_round_next" />
 
     <ImageView
         android:id="@+id/imageView17"

@@ -5,7 +5,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
-tools:context=".Less.MainActivity">
+tools:context=".Ui.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -47,7 +47,7 @@ tools:context=".Less.MainActivity">
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:icon="@drawable/ic_baseline_favorite_24" />
+                android:icon="@drawable/favourite_selected" />
 
         </com.google.android.material.tabs.TabLayout>
 
@@ -62,8 +62,131 @@ tools:context=".Less.MainActivity">
         android:background="@color/colorPrimary"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
     </androidx.viewpager.widget.ViewPager>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom">
+
+        <com.rishabhharit.roundedimageview.RoundedImageView
+            android:id="@+id/imageViewBackNavar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/back_navar_music"
+            app:cornerRadius="50dp"
+            app:roundedCorners="all" />
+
+        <eightbitlab.com.blurview.BlurView
+            android:id="@+id/blurBack"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></eightbitlab.com.blurview.BlurView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/navarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/back_navar_l"
+            android:foregroundTint="#00FFFFFF"
+            app:layout_constraintBottom_toBottomOf="@+id/RecyclerViewTrack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <ImageView
+                android:id="@+id/imageViewNextN"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="1dp"
+                android:padding="1dp"
+                android:src="@drawable/ic_round_next"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewPlayN"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageViewPlayN" />
+
+            <ImageView
+                android:id="@+id/imageViewPlayN"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:layout_marginEnd="1dp"
+                android:src="@drawable/ic_round_play"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewPreviewN"
+                app:layout_constraintEnd_toStartOf="@+id/imageViewNextN"
+                app:layout_constraintTop_toTopOf="@+id/imageViewPreviewN" />
+
+            <ImageView
+                android:id="@+id/imageViewPreviewN"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:layout_marginEnd="2dp"
+                android:padding="1dp"
+                android:src="@drawable/ic_round_previous"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageViewPlayN"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.rishabhharit.roundedimageview.RoundedImageView
+                android:id="@+id/coverNavar"
+                android:layout_width="49dp"
+                android:layout_height="49dp"
+                android:layout_marginStart="12dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/coverrrl"
+                app:cornerRadius="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:roundedCorners="all" />
+
+            <TextView
+                android:id="@+id/textViewTitleN"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="1dp"
+                android:ellipsize="marquee"
+                android:ems="10"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollbars="vertical"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="title"
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorWaith"
+                android:textColorHighlight="#121212"
+                android:textSize="19sp"
+                app:layout_constraintBottom_toTopOf="@+id/textViewArtistN"
+                app:layout_constraintEnd_toStartOf="@+id/imageViewPreviewN"
+                app:layout_constraintStart_toEndOf="@+id/coverNavar"
+                tools:text="title" />
+
+            <TextView
+                android:id="@+id/textViewArtistN"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="7dp"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollbars="vertical"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="artist"
+                android:textAlignment="viewStart"
+                android:textColor="#DAD8D8"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageViewPreviewN"
+                app:layout_constraintStart_toStartOf="@+id/textViewTitleN"
+                tools:text="artist" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Less.PlayActivity">
+    tools:context=".Ui.PlayActivity">
 
     <ImageView
         android:id="@+id/imageblur"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginEnd="200dp"
         android:scaleType="centerCrop"
         android:src="@drawable/matt"
         app:layout_constraintBottom_toTopOf="parent"
@@ -34,8 +33,8 @@
         android:id="@+id/coverPlayActivity"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="25dp"
         android:scaleType="fitXY"
         android:src="@drawable/coverrrl"
         app:civ_border_color="#00d6b3"
@@ -44,15 +43,29 @@
         app:civ_shadow_color="#70706D"
         app:civ_shadow_radius="7dp"
         app:cornerRadius="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.428"
+        app:layout_constraintEnd_toStartOf="@+id/constraintLayout5"
+        app:layout_constraintStart_toStartOf="@+id/imageblur"
+        app:layout_constraintTop_toTopOf="@+id/guideline3"
         app:roundedCorners="all" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.065" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.96" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout5"
         android:layout_width="320dp"
         android:layout_height="0dp"
         android:background="@drawable/background_playland"
@@ -64,11 +77,11 @@
             android:id="@+id/elapsedTimeLable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginBottom="17dp"
             android:text="00:00"
             android:textColor="#FFFFFF"
-            android:textSize="15sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/randomButton"
             app:layout_constraintStart_toStartOf="@+id/seekBar" />
 
@@ -132,6 +145,7 @@
             android:layout_height="29dp"
             android:layout_marginEnd="26dp"
             android:layout_marginBottom="25dp"
+            android:padding="1dp"
             app:layout_constraintBottom_toTopOf="@+id/seekBar"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/heart" />
@@ -156,6 +170,7 @@
             android:layout_marginStart="18dp"
             android:layout_marginEnd="18dp"
             android:layout_marginBottom="34dp"
+            android:paddingStart="17dp"
             android:progressBackgroundTint="#FFFDFD"
             android:progressTint="#00a273"
             app:layout_constraintBottom_toTopOf="@+id/randomButton"
@@ -168,6 +183,7 @@
             android:layout_height="26dp"
             android:layout_marginEnd="26dp"
             android:layout_marginBottom="25dp"
+            android:padding="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/more" />
@@ -176,24 +192,25 @@
             android:id="@+id/totalTimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="7dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginBottom="17dp"
             android:text="00:00"
             android:textColor="#FFFFFF"
-            android:textSize="15sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/imageTekrar"
             app:layout_constraintEnd_toEndOf="@+id/seekBar"
             tools:text="03:15" />
 
         <ImageView
             android:id="@+id/imageSpeaker"
-            android:layout_width="33dp"
+            android:layout_width="35dp"
             android:layout_height="33dp"
-            android:layout_marginTop="23dp"
-            android:layout_marginEnd="26dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="23dp"
+            android:padding="1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/speaker" />
+            app:srcCompat="@drawable/sound_new" />
 
         <ImageView
             android:id="@+id/imageTekrar"
@@ -201,6 +218,7 @@
             android:layout_height="28dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="25dp"
+            android:padding="2dp"
             app:layout_constraintBottom_toTopOf="@+id/imageCreate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -225,6 +243,7 @@
             android:layout_height="28dp"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
+            android:padding="2dp"
             app:layout_constraintBottom_toBottomOf="@+id/btnBackward"
             app:layout_constraintEnd_toStartOf="@+id/btnBackward"
             app:layout_constraintHorizontal_bias="0.5"
@@ -237,6 +256,7 @@
             android:layout_width="27dp"
             android:layout_height="27dp"
             android:layout_marginBottom="25dp"
+            android:padding="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/randomButton"
             app:layout_constraintStart_toStartOf="@+id/randomButton"
@@ -244,17 +264,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.030746706" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

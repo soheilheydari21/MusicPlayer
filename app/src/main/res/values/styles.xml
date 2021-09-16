@@ -6,35 +6,41 @@
         <item name="colorPrimary">@color/colorStore</item>
         <item name="colorPrimaryDark">@color/colorStore</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:navigationBarColor">#101010</item>
 
     </style>
 
-    <style name="SpalshTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimaryDark">@color/colorTheme</item>
-
+        <item name="android:navigationBarColor">#101010</item>
     </style>
 
     <style name="PlayLayout" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">#F01E1D1D</item>
-        <item name="colorPrimaryDark">#A900331E</item>
+        <item name="colorPrimaryDark">#CD00331E</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:navigationBarColor">#101010</item>
     </style>
 
     <style name="AlbumLayout" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimaryDark">@color/colorStore</item>
+        <item name="android:navigationBarColor">#101010</item>
     </style>
 
     <style name="FolderLayout" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimaryDark">@color/colorStore</item>
+        <item name="android:navigationBarColor">#101010</item>
     </style>
 
     <style name="SearchLayout" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="android:navigationBarColor">#101010</item>
     </style>
 
     <style name="AboutLayout" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimaryDark">@color/colorStore</item>
+        <item name="android:navigationBarColor">#101010</item>
     </style>
 
 

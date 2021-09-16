@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#000000"
-    tools:context=".Controllers.FragmentAlbums"
+    tools:context=".Ui.Controllers.FragmentAlbums"
     android:animateLayoutChanges="true">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -22,6 +22,7 @@
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="0dp"
         android:background="@color/colorPrimary"
+        android:paddingBottom="56dp"
         android:scrollbarDefaultDelayBeforeFade="400" />
 
 </RelativeLayout>

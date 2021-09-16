@@ -56,7 +56,7 @@
         android:fontFamily="sans-serif"
         android:text="Developer  Soheil "
         android:textAllCaps="false"
-        android:textColor="#BAFBDD"
+        android:textColor="#D5D5D5"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

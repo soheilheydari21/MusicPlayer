@@ -5,14 +5,21 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:orientation="vertical"
-    tools:context=".Controllers.FragmentFolders">
+    tools:context=".Ui.Controllers.FragmentFolders">
 
     <TextView
         android:id="@+id/textViewComingSoon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginBottom="14dp"
         android:text="No song Favourites"
         android:textColor="#B6B0B0"
-        android:textSize="24sp" />
+        android:textSize="18sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecyclerViewLike"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible" />
 </FrameLayout>

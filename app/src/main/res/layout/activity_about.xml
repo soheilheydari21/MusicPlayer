@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorStore"
-    tools:context=".Less.AboutActivity">
+    tools:context=".Ui.AboutActivity">
 
     <com.rishabhharit.roundedimageview.RoundedImageView
         android:id="@+id/imageView"
@@ -22,7 +22,7 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
         android:fontFamily="serif"
@@ -31,7 +31,6 @@
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -39,10 +38,10 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="version : 1.3.71"
+        android:text="version : 1.0.0"
         android:textAlignment="center"
         android:textColor="#AEAEAE"
-        android:textSize="24sp"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -85,8 +84,7 @@
             android:id="@+id/cardViewGithub"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginTop="1dp"
-            app:cardBackgroundColor="#0e0e0f"
+            app:cardBackgroundColor="#000E0E0F"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardViewLinkedinMe">
@@ -126,7 +124,7 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="4dp"
-            app:cardBackgroundColor="#0e0e0f"
+            app:cardBackgroundColor="#000E0E0F"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView12">
@@ -165,7 +163,7 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="4dp"
-            app:cardBackgroundColor="#0e0e0f"
+            app:cardBackgroundColor="#000E0E0F"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView10">
